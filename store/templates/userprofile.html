@@ -1,0 +1,180 @@
+{% extends "basewhite.html" %}
+{% block content %}
+{% load static %}
+
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+ .image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 80px;
+    cursor: pointer;
+     
+ position: absolute;
+  bottom: 8px;
+  right: 116px;
+  top: 100px;
+}
+  </style>
+
+
+ <div class="text-center">
+    <header>
+      {% for i in user %}
+        <div class="name">
+              <p>
+              
+            {% if not i.image %}
+
+
+              <form method="POST" action="/updateimage/" enctype="multipart/form-data">
+                {% csrf_token %}
+                  <input type="hidden" name="id" value='{{i.user_id}}'>
+                  <div>
+                     <img src="{% static '/assets/images/inuse/demoimage.jpg' %}"alt="Snow" height="200px" width="150px" style="display:inline-block;border-radius:50%;margin-top:10px;height:150px">
+                      <div class="image-upload">
+                          <label for="file-input">
+                              <i class="material-icons">&#xe439;</i>
+                          </label>
+                          <input id="file-input" type="file" name="image"/>
+                      </div>
+                    </div>
+            
+                  <button class="btn btn-success" style="background-color:#87cefa; border:1px solid #87cefa;  margin-top:5px;" type="submit">Upload Image</button> 
+              </form> 
+  
+            {%else%}
+                
+          
+
+            <form method="POST" action="/updateimage/" enctype="multipart/form-data" style="display:inline-block">
+              {% csrf_token %}
+                     <input type="hidden" name="id" value='{{i.user_id}}'>
+
+                  <div>
+                    <img src="{{i.image.url}}" name="image" id="image" height="200px" width="150px"  style="display:inline-block;border-radius:50%;margin-top:10px;height:150px"/>
+                      <div class="image-upload">
+                          <label for="file-input">
+                              <i class="material-icons">&#xe439;</i>
+                          </label>
+
+                          <input id="file-input" type="file" name="image"/>
+                      </div>
+                  </div>
+                     <button class="btn btn-success" style="background-color:#87cefa; border:1px solid #87cefa; " type="submit">Update Image</button> 
+                </form>  
+                  {%endif%}
+                   </p>                
+                
+        </div>
+    </header>
+
+
+        <form method="POST" action="/updateprofile/" enctype="multipart/form-data" onsubmit="return(reviewval());" style="display:inline-block">
+         {% csrf_token %}
+
+          <input type="hidden" name="id" value='{{i.user_id}}'>
+          
+          <div class="form-group">
+            <h3 style="margin-top:10px;"><i class="fa fa-user"></i> Personal Info</h3>
+            <label id="UpdateFname">First Name</label>
+            <input class="form-control" type="text" name = 'fname' placeholder="First name" style="width:200px;" id="fname" value="{{ i.user.first_name}}" >
+          </div>
+
+          <div class="form-group">
+            <label id="UpdateLanme">Last Name</label>
+            <input class="form-control" type="text" name='lname' placeholder="Last Name" style="width:200px;" id="lname" value="{{i.user.last_name}}">
+              </div>  
+              <div class="form-group">
+              <label id="UpdateAdd">Address</label>
+              <input class="form-control" type="text" name='city' placeholder="Address"  width="48" height="48" style="width:200px;" id="city" value="{{i.city}}">
+                </div>
+              <button class="btn btn-success" style="background-color:#87cefa; border:1px solid #87cefa; " id = "submitreview" type="submit" >Update Information</button> 
+         </form> 
+
+          </div>
+
+              <div class='box text-center'>
+        <div>
+          
+                <p class="title">
+                    <i class="fa fa-info-circle" style="font-size:20px;"></i> Contact
+                </p>
+                
+
+                <p class="padd-top"></p>
+
+                {% if not i.mobile%}
+                 <p>
+                    <i class="fa fa-phone"></i>
+                   <p>WWWWWW</p>
+                </p>      
+                {% else %}
+                <p>
+                    <i class="fa fa-phone"></i>
+                    {{i.mobile}}
+                </p>     
+              {% endif %}       
+
+                <p>
+                    <i  class="fa fa-envelope"></i>
+                     {{i.user.email}}
+                </p>                
+
+                <p>
+                  {% if i.user_profile.city == '' %}
+                    <i class="fa fa-home"></i>Enter Address
+                  {%else%}
+                   <i class="fa fa-home"></i>
+      {{i.city}}
+                  {%endif%}
+                   
+                </p>
+              
+
+
+               
+            </div> 
+
+          <div>
+        {% endfor %}
+    </div>
+</div>
+  
+<script type="text/javascript">
+
+function reviewval()
+{
+  var v1=document.getElementById('fname').value
+  var v2=document.getElementById('lname').value
+  var v3=document.getElementById('city').value
+
+  var letters = /^[A-Za-z]+$/;
+
+  if(v1.length<=3)
+  {
+    alert("First Name should have atleast 3 character")
+    return false;
+  }
+
+  if(v2.length<=3)
+  {
+    alert("Last Name should have atleast 3 character")
+    return false;
+  }
+
+  if(v3.length<=10)
+  {
+    alert("Address should have atleast 20 character")
+    return false;
+  }
+  return true;
+
+}
+</script>
+{% endblock content %}

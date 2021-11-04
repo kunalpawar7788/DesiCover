@@ -1,0 +1,46 @@
+
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+<h1><center>Add Product</center></h1>
+	
+	<form action="{% url 'upload_csv' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+			{% csrf_token %}  
+
+			 <div class='form-group'>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <div class="alert alert-error"style='color: red'>{{ message }}</div>
+        {% endfor %}
+      </ul>
+      {% endif %}
+  </div>
+	<div class="form-group">
+	    <label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label">File: </label>
+	    <div class="col-md-8">
+	        <input type="file" name="csv_file" id="csv_file" required="True" class="form-control">
+	    </div>                    
+	</div>
+	<div class="form-group">                    
+	    <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+	         <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Upload </button>
+	    </div> 
+	</div>
+	</form>
+
+
+
+	<a href="/export_product_csv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Product All Data</a>
+
+	<a href="/export_product_csv_day" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Product Oneday Data</a>
+
+
+	<a href="/export_product_csv_week" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Product Week Data</a>
+
+	<a href="/export_product_csv_month" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Product Month Data</a>
+
+
+
+
+{%endblock content%}

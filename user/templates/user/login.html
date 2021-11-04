@@ -1,0 +1,66 @@
+
+{% block content %}
+
+
+	<div class="container-fluid">
+		<div class="feature-boxes">
+			<div class="container">
+
+			
+				<div class="col-md-6">
+					<div class="featured-box featured-box-primary text-left mt-3 mt-md-5">
+						<div class="box-content">
+							<h4 class="heading-primary text-uppercase mb-3">Log In Now</h4>
+							<form method='POST' action="{% url 'login' %}">
+								{% csrf_token %}
+
+
+
+								<div class="form-row">
+									<div class="form-group col">
+										<label>User Namess</label>
+										<input type="text" name="username" class="form-control form-control-lg"
+											required='true'>
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-lg-6">
+										<label>Password</label>
+										<input type="password" name="passw" class="form-control form-control-lg"
+											required='true'>
+									</div>
+
+								</div>
+								<div class="form-row">
+									<div class="form-group col">
+										<input type="submit" value="Log In" class="btn btn-important float-right mb-3"
+											data-loading-text="Loading...">
+
+											
+									</div>
+									<a href="{% url 'register' %}" >New User ?</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+
+</div>
+{% endblock content %}

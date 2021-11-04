@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="card card-body">
+    <h4>Filter Orders:</h4>
+
+      <form method="get">
+            {{ myFilter.form.as_p }}
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+
+  <table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+        <tr>               
+            <th>Order Id</th>  
+            <th>Order Date</th>   
+            <th>Coupon</th>  
+            <th>Payment Mode</th>
+            <th>Bank Name</th>
+            <th>Payment Mode</th>
+            <th>Currency</th>
+            <th>TotalAmount</th>                           
+        </tr>  
+    </thead>  
+
+    <tbody>  
+        {% for order in orders %}  
+            <tr> 
+                <td>{{ order.order_id}}</td>  
+                <td>{{ order.order_date }}</td>  
+                <td>{{ order.coupon.discount }}</td>  
+                <td>{{ order.paymentmode}}</td>
+                <td>{{ order.bank.bankname }}</td>
+                <td>{{ order.bank.paymentmode }}</td>
+                <td>{{ order.bank.currency }}</td>
+                <td>{{ order.bank.totalamount }}</td>
+            </tr>                         
+        {% endfor %}
+    </tbody>
+  </table>
+</div> 
+
+{% endblock content %}

@@ -1,0 +1,43 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Multiple Image Upload</title>
+</head>
+<body>
+
+	<form action="{% url 'multipleimage' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+		{% csrf_token %}  
+	<div class="form-group">
+	    <label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label">File: </label>
+	    <div class="col-md-8">
+	         <input type="file" name="images" multiple>
+	    </div>                    
+	</div>
+	<div class="form-group">                    
+	    <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+	         <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Upload </button>
+	    </div> 
+	</div>
+	</form>
+
+	<table id="gallery" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Photo</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for photo in photos %}
+      <tr>
+      <!-- 	<td>{{ photo.images.name }}</td> -->
+        <td><a href="{{ photo.images.name }}">{{ photo.images.name }}</a></td>
+        <td><img src="{{photo.images.url}}" alt="Product image" class="product-image" height="100px" width="100px"></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>

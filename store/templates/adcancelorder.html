@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+
+ <table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+        <tr>               
+            <th>Order Id</th>
+            <th>Order Date</th>
+            <th>Customer Name</th>
+            <th>Payment</th> 
+            <th>Cancel Info</th>   
+            <th>Date of Cancel</th>
+            <th>Amount</th>
+            <th>Initiate Into Wallet</th>
+                         
+        </tr>  
+    </thead>  
+
+    <tbody>  
+        {% for order in wallet %}  
+            <tr> 
+                <td>{{ order.order_id}}</td> 
+                <td>{{ order.order_date}}</td> 
+                <td>{{ order.first_name}}</td>
+                <td>{{ order.bank.paymentid }}</td>  
+                <td>{{ order.cancelorders.cancelinfo}}</td> 
+                <td>{{ order.cancelorders.add_date }}</td>
+                <td>{{ order.products.price}}</td>
+                <td>
+                    <form action="/admincancelorder/" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+                    {% csrf_token %}  
+                     <div class="form-group">
+                        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Money</label>
+                        <div class="col-md-8">
+                             <input type="number" name="refundmoney" required/>
+                             <input type="hidden" name="order_id" value="{{order.order_id}}" readonly/>
+                             <input type="hidden" name="Id" value="{{order.id}}" readonly/>
+                        </div>                    
+                     </div>
+
+                     <div class="form-group">
+                      
+                        <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Approve</button>
+                    </div> 
+                 
+                </form>
+            </td>
+    
+               
+            </tr>                         
+        {% endfor %}  
+
+{% endblock content %}

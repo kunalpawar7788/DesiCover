@@ -1,0 +1,50 @@
+<html>
+{% load static %}
+
+<head>
+    {% csrf_token %}
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr> 
+       
+        <th>Order Id</th>  
+        <th>Address Line1</th>   
+        <th>Address Line2</th>  
+        <th>Pincode</th>
+        <th>City</th>
+        <th>State</th>
+        <th>mobile number</th>
+        <th>email</th>
+        <th>Amount</th>
+        <th>First Name</th>
+        <th>Last Name</th> 
+        <th>ACTION VA</th>                                 
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for order in orders %}  
+    <tr> 
+
+        <td>{{ order.order_id}}</td>  
+        <td>{{ order.address1 }}</td>  
+        <td>{{ order.address2 }}</td>  
+        <td>{{ order.pincode }}</td>
+        <td>{{ order.city }}</td>
+        <td>{{ order.state }}</td>
+        <td>{{ order.phone }}</td>
+        <td>{{ order.email }}</td>
+        <td>{{ order.totalamount }}</td>
+        <td>{{ order.first_name }}</td>
+        <td>{{ order.last_name }}</td>
+        <td>
+            <a href="/datedelete/{{ order.order_id }}"><span class="glyphicon glyphicon-pencil">DELTE</span></a>
+        </td>
+
+        
+{% endfor %}  
+    </tbody>  
+</table>  
+</html>

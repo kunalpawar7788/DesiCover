@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+ 
+<h1>Update Model Names<p>{{form.model_No}}</p></h1>
+<form action="/bulkupdate/" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+    {% csrf_token %}  
+  <div class="form-group">
+      <label class="col-md-3 col-sm-3 col-xs-12 control-label">Company Name </label>
+      <div class="col-md-8">
+          <select name="company_id" id="empid">
+            
+            {% for i in form %}
+              <option value="{{i}}" class="col-md-12">{{i}}</option>
+              {% endfor %}
+            
+          </select> 
+      </div>                    
+  </div>
+
+    <div class="form-group">
+      <label class="col-md-3 col-sm-3 col-xs-12 control-label">Price</label>
+      <div class="col-md-4">
+          <input type="text" class="form-control" name='price' required>
+      </div>                    
+  </div>
+
+
+
+  <div class="form-group">                    
+      <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+           <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Upload </button>
+      </div> 
+  </div>
+</form>
+
+{% endblock content %}
+

@@ -1,0 +1,453 @@
+{% extends "basewhite.html" %}
+{% block content %}
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<style>
+
+body { padding: 2em; }
+
+
+/* Shared */
+.loginBtn {
+  box-sizing: border-box;
+  position: relative;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 34px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+  color: #FFF;
+}
+.loginBtn:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 100%;
+}
+.loginBtn:focus {
+  outline: none;
+}
+.loginBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+}
+
+
+/* Facebook */
+.loginBtn--facebook {
+  background-color: #4C69BA;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#4C69BA), to(#3B55A0));
+  background-image: linear-gradient(#4C69BA, #3B55A0);
+  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  text-shadow: 0 -1px 0 #354C8C;
+}
+.loginBtn--facebook:before {
+  border-right: #364e92 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+}
+.loginBtn--facebook:hover,
+.loginBtn--facebook:focus {
+  background-color: #5B7BD5;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#5B7BD5), to(#4864B1));
+  background-image: linear-gradient(#5B7BD5, #4864B1);
+}
+
+
+/* Google */
+.loginBtn--google {
+  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+  background: #DD4B39;
+}
+.loginBtn--google:before {
+  border-right: #BB3F30 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+}
+.loginBtn--google:hover,
+.loginBtn--google:focus {
+  background: #E74B37;
+}
+
+</style>
+    <script>
+        var OtpRequestTrialCount = 0;
+
+        function SendOTP() 
+        {
+
+            OtpRequestTrialCount = OtpRequestTrialCount + 1;
+            var phno = $("#phonenumber").val();
+            var phoneno = /^\d{10}$/;
+
+            if (OtpRequestTrialCount > 2) 
+            {   
+                alert("Mobile number enter more than 2 times!")
+                return false;
+            }
+
+            if (phno == null || phno == '' || !phno.match(phoneno)) 
+            {
+                alert("Please enter valid mobile no.")
+            } 
+            else 
+            {
+               console.log("Login :");
+                $.ajax
+                ({
+                    type: 'POST',
+                    url: '/login/otpsend',
+                    data: 
+                    {
+                        phonenumber: $('#phonenumber').val(),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function(data) 
+                    {
+                        if (data == 'Success') 
+                        {
+                            alert('OTP is Send Successfully to '+phno)
+                            document.getElementById("otp").disabled = false;
+                        }
+
+                        if (data=='Mobile')
+                        {
+                            alert("Mobile Number already exists")
+                        }
+                        if (data=='Failure')
+                        {
+                            alert("Incorrect Mobile number")
+                        }
+                    }
+                });
+
+            }
+        }
+
+        function verifyotp() 
+        {
+            var phno = $("#phonenumber").val();
+            var otp = $("#otp").val();
+
+            
+
+            if(otp=='')
+            {
+                alert('Enter OTP value')
+                return false
+            }
+            if(otp.length!=4)
+            {
+                alert('Enter 4 digit OTP')
+                return false
+            }
+            else
+            {
+                $.ajax
+                ({
+                    type: 'POST',
+                    url: '/login/verifyotp',
+                    data: 
+                    {
+                        phonenumber: $('#phonenumber').val(),
+                        otp: $('#otp').val(),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function(data) 
+                    {
+                        if (data == 'Success') 
+                        {
+                            alert("Otp Is Correct")
+                            document.getElementById("fname").disabled = false;
+                            document.getElementById("lname").disabled = false;
+                            document.getElementById("username").disabled = false;
+                            document.getElementById("passw1").disabled = false;
+                            document.getElementById("cnf_passw").disabled = false;
+                        } 
+                        else 
+                        {
+                            alert("Invalid OTP")
+                        }
+
+                    }
+                });
+            }
+
+        }
+
+
+        function purasubmit() 
+        {
+            var fname= document.getElementById('fname').value;
+            var lname= document.getElementById('lname').value;
+            var username= document.getElementById('username').value;
+            var passw= document.getElementById('passw1').value;
+            var cnf_passw= document.getElementById('cnf_passw').value;
+            var email=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            var count = 0;
+
+            alert('submit hone wala hai')
+
+            if(fname=='')
+            {
+                alert("First Name Is Empty")  
+                return false
+            }
+
+            if(fname.length<=3)
+            {
+                alert("First Name is to Short")
+                return false
+            }
+
+            if(lname=='')
+            {
+                alert("Last Name Is Empty")
+                return false
+            }
+
+            if(lname.length<=3)
+            {
+                alert("Last Name is to Short")
+                return false
+            }
+
+            if(username=='')
+            {
+                alert("Email is Empty")
+                return false
+            }
+
+
+            if(!username.match(email))
+            {
+                alert("Invalid Email Id")
+                return false
+            }
+
+            if(passw=='')
+            {
+                alert('Password is Empty')
+                return false
+            }
+
+            count += /[a-z]/.test(passw) ? 1 : 0;
+            count += /[A-Z]/.test(passw) ? 1 : 0;
+            count += /\d/.test(passw) ? 1 : 0;
+            count += /[@]/.test(passw) ? 1 : 0;
+
+            if(count < 2)
+            {
+                alert('Password is Weak')
+                return false
+            }
+
+            if(cnf_passw=='')
+            {
+                alert("Confirm Password is Empty")
+                return false
+            }
+
+            if(passw!=cnf_passw)
+            {
+                alert("Password doesn't match with Confirm Password")
+                return false
+            }
+            
+            else
+            {
+          
+                $.ajax
+                ({
+                    type: 'POST',
+                    url: '/user/register/',
+                    data: 
+                    {
+                        fname: $('#fname').val(),
+                        lname: $('#lname').val(),
+                        username: $('#username').val(),
+                        passw: $('#passw1').val(),
+                        cnf_passw: $('#cnf_passw').val(),
+                        phonenumber: $('#phonenumber').val(),
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    success: function(data)
+                    {
+                        if(data=='Taken')
+                        {
+                            alert("Username is already Taken")
+                        }
+                        else
+                        {
+                            window.location.href = '/login'
+                        }
+                    }
+
+                })
+            }
+        }
+    </script>
+
+
+        <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Login</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style="background-image: url('{% static 'assets/images/inuse/bg-login.jpg' %}')">
+                <div class="container">
+                    <div class="form-box">
+                        <div class="form-tab">
+                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="false">Sign In</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" aria-selected="true">Register</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane fade" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                                    
+                                    <!-- Login form  -->
+
+                                    <form method="POST" action="/login/">
+                                        {% csrf_token %}
+
+                                        {% if messages %}
+                                          <ul class="messages">
+                                            {% for message in messages %}
+                                              <div class="alert alert-error"style='color: red'>{{ message }}</div>
+                                            {% endfor %}
+                                          </ul>
+                                          {% endif %}
+                                {% comment %}
+                                    <!-- <div class="form-group">
+                                        <button class="loginBtn loginBtn--facebook"><a href="{% provider_login_url 'facebook' method='js_sdk'%}">Login with Facebook</a></button>
+                                        <button class="loginBtn loginBtn--google"><a href="{% provider_login_url 'google'%}">Login with Google</a></button>     
+                                   </div> --><!-- End .form-group -->
+                                {% endcomment %}
+                        <div class="form-group">
+                            <b style="margin-left:50%">-OR-</b> 
+                                   </div><!-- End .form-group -->
+                    
+
+                                        <div class="form-group">
+                                            <label for="singin-email-2">Username or email address *</label>
+                                            <input type="text" class="form-control" name="username" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="singin-password-2">Password *</label>
+                                            <input type="password" class="form-control" name="passw" id="passw" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>LOG IN</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="signin-remember-2">
+                                                <label class="custom-control-label" for="signin-remember-2">Remember Me</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-footer -->
+                                    </form>
+                                    
+                                </div><!-- .End .tab-pane -->
+                                <div class="tab-pane fade show active" id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+                                   
+                                        {% csrf_token %}
+                                        <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="register-email-2">Your Mobile No *</label>
+                                            <input type="tel" class="form-control" name="phonenumber" id="phonenumber" required>
+                                           
+                                            </div>
+                                        <div class="col-sm-6" style="margin-top: 8.5%">
+                                        <button onclick="SendOTP()" class="btn btn-outline-primary-2" id="Motp"><span>Send OTP</span></button>
+                                        </div>
+                                        </button>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label for="register-email-2">Enter OTP *</label>
+                                                <input type="tel" class="form-control" disabled="true" id="otp" name="otp" required>
+                                              
+                                                </div>
+                                            <div class="col-sm-6" style="margin-top: 8.5%">
+                                            <button onclick="verifyotp()" class="btn btn-outline-primary-2" id="Motp">Verify OTP</button>
+                                        </div>
+                                        </button>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="register-email-2">Your email address *</label>
+                                            <input type="email" class="form-control" name="username" id="username" disabled="true" required>
+                                            
+                                        </div><!-- End .form-group -->
+                                      
+                                        <div class="form-group">
+                                            <label for="register-email-2">Your First Name *</label>
+                                            <input type="text" class="form-control"  name="fname" id="fname" disabled="true" required>
+                                        
+                                        </div><!-- End .form-group -->
+                                       
+                                        <div class="form-group">
+                                            <label for="register-email-2">Your Last Name *</label>
+                                            <input type="text" class="form-control"  name="lname" id="lname" disabled="true" required>
+                                        
+                                        </div><!-- End .form-group -->
+                                        
+                                    <div class="form-group">
+                                            <label for="register-password-2">Password *</label>
+                                            <input type="password" class="form-control"  name="passw1" id="passw1" disabled="true" required>
+                                          
+                                    </div><!-- End .form-group -->
+                                             
+                                    <div class="form-group">
+                                        <label for="register-password-2">Confirm Password *</label>
+                                        <input type="password" class="form-control"  name="cnf_passw" id="cnf_passw" disabled="true" required>
+                                      
+                                    </div><!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="submit" onclick="purasubmit()" class="btn btn-outline-primary-2">
+                                                <span>SIGN UP</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+                                        </form>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+                                                <label class="custom-control-label" for="register-policy-2">I agree to the <a href="#">privacy policy</a> *</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-footer -->
+                                    
+                                </div><!-- .End .tab-pane -->
+                            </div><!-- End .tab-content -->
+                        </div><!-- End .form-tab -->
+                    </div><!-- End .form-box -->
+                </div><!-- End .container -->
+            </div><!-- End .login-page section-bg -->
+       
+        </main><!-- End .main -->
+
+     {% endblock content %}

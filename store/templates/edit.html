@@ -1,0 +1,139 @@
+
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+
+<div class="container-fluid main-wrapp" id="content-grid" align="center">
+
+  <form method="POST" class="post-form" action="/edit/{{ product.id }}" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="container">
+        <br>
+        <div class="form-group row">
+          <label class="col-sm-1 col-form-label"></label>
+          <div class="col-sm-4">
+            <h3>Update Details</h3>
+          </div>
+        </div>
+
+      </div>
+
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <input type="hidden" name="id" id="id" value="{{ product.id }}" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Product ID:</label>
+      <div class="col-sm-4">
+        <input type="text" name="sku" value="{{ product.sku}}" />
+      </div>
+    </div>
+
+      <div class="form-group row">
+      <label class="col-sm-2 col-form-label">CATEGORY:</label>
+        <div class="col-sm-4">
+          <input type="text" name="category"  value="{{ product.category }}" />
+        </div>
+     </div>
+
+       <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Model No:</label>
+        <div class="col-sm-4">
+          <input type="text" name="model_No" value="{{ product.model_No }}" />
+        </div>
+      </div>
+
+       <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Images1:</label>
+        <div class="col-sm-4">
+          <input type="file" name="images1"/><br>
+          <img src="{{ product.images1.url }}" name="images1" height="100" width="100" /> 
+        </div>
+      </div>
+
+       <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Images2:</label>
+        <div class="col-sm-4">
+          <input type="file" name="images2"/><br>
+          <img src="{{product.images2.url  }}" name="images2" height="100" width="100" /> 
+        </div>
+      </div>
+
+
+       <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Images3:</label>
+        <div class="col-sm-4">
+          <input type="file" name="images3"/><br>
+          <img src="{{ product.images3.url  }}" name="images3" height="100" width="100" /> 
+        </div>
+      </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Product Name:</label>
+      <div class="col-sm-4">
+        <input type="text" name="title" value="{{ product.title }}" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">DESCRIPTION:</label>
+      <div class="col-sm-4">
+        <input type="text" name="description" value="{{ product.description }}" />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">PRICE :</label>
+      <div class="col-sm-4">
+        <input type="text" name="price" value="{{ product.price }}" />
+      </div>
+    </div>
+  
+
+     <div class="form-group row">
+      <label class="col-sm-2 col-form-label">SUB CATEGORY:</label>
+      <div class="col-sm-4">
+        <input type="text" name="sub_category" value="{{ product.sub_category }}" />
+      </div>
+    </div>
+   
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Weight:</label>
+        <div class="col-sm-4">
+          <input type="text" name="weight" value="{{ product.weight }}" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Size:</label>
+        <div class="col-sm-4">
+          <input type="text" name="size" value="{{ product.size }}" />
+        </div>
+      </div>
+
+   
+
+       <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Company:</label>
+        <div class="col-sm-4">
+          <input type="text" name="company" value="{{ product.company }}" />
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-4">
+          <button type="submit" class="btn btn-success">Update</button>
+        </div>
+      </div>
+   
+  </form>
+   </div>
+
+
+{% endblock content %}

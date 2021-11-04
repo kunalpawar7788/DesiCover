@@ -1,0 +1,373 @@
+{% extends "basewhite.html" %}
+{% block content %}
+{% load static %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+ .image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    width: 80px;
+    cursor: pointer;
+     
+ position: absolute;
+  bottom: 8px;
+  right: 116px;
+  top: 100px;
+}
+
+
+      #popup{
+        display: none;
+        background-color: white;
+        color: black;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      .bt{
+          margin: 8px;
+        border-radius: 20px !important;
+        font-size: 12px;
+          background-color: transparent;
+          padding: 8px 12px;
+      }
+      .outline-light{
+        border-color: #f8f9fa;
+        color: #f8f9fa;
+      }
+      .bt:hover{
+        background-color: #f8f9fa;
+        color: black; 
+      }
+      .txn-list {
+      background-color: #fff;
+      padding: 12px 10px; 
+      color: #777;
+      font-size: 14px;
+      margin: 7px 0;
+    }
+    .debit-amount {
+      color: red;
+      float: right;
+    }
+
+    .credit-amount {
+      color: green;
+      float: right;
+    }
+
+
+  </style>
+        <main class="main">
+          
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                    </ol>
+                    {% if messages %}
+						<ul class="messages">
+							{% for message in messages %}
+								<div class="alert alert-error"style='color: red'>{{ message }}</div>
+							{% endfor %}
+						</ul>
+					{% endif %}
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+            	<div class="dashboard">
+	                <div class="container">
+	                	<div class="row">
+	                		<aside class="col-md-4 col-lg-3">
+	                			<ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+								    
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">Orders</a>
+								    </li>
+								    
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-address-link" data-toggle="tab" href="#tab-address" role="tab" aria-controls="tab-address" aria-selected="false">Adresses</a>
+								    </li>
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-account-link" data-toggle="tab" href="#tab-account" role="tab" aria-controls="tab-account" aria-selected="false">Account Details</a>
+								    </li>
+
+								    <li class="nav-item">
+								        <a class="nav-link" id="tab-wallet-link" data-toggle="tab" href="#tab-wallet" role="tab" aria-controls="tab-wallet" aria-selected="false">Wallet</a>
+								    </li>
+
+								   <!--  <li class="nav-item">
+								        
+								    </li> -->
+								</ul>
+	                		</aside><!-- End .col-lg-3 -->
+
+	                		<div class="col-md-8 col-lg-9">
+	                			<div class="tab-content">
+	                			  {% for order in order %}	
+								    <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+                                        <span class="col-sm-3 col-xs-3" id="track1">Order id:{{ order.order_id}}</span>
+                                        <span class="col-sm-6 col-xs-6" id="track2" style="float: left; font-size: 1em;">Order placed {{ order.order_date}}</span>
+            							<span class="col-sm-3 col-xs-3" id="track3"><a href='/trackpackage/{{order.id}}'>Track Order</a></span>
+            							<div style="margin-top: 2.5em;">
+							                <div class="col-sm-3 col-xs-6">
+							                   <a href="/product/{{order.products.product_id.id}}"></a><img src="{{order.products.product_id.images1.url}}" alt="img1" height="100" width="100"/>
+							                </div>
+							                
+							            
+							                <div class="col-sm-6 col-xs-6">
+							                    <p style="font-size: 1.5em;"><strong><a href="/product/{{order.products.product_id.id}}">{{ order.products.product_id.title }}</strong></p>
+							                        <p>Rs: {{ order.products.price}}</p>
+							                    {% if order.paymentmode == 'cod' %}
+							                     <p>Payment Mode: Cash On Delivery</p>
+							                   {% elif order.paymentmode == 'paytm' %}
+							                         <p>Payment Mode: Paytm</p>
+							                         <p>Transaction Status {{order.bank.status}}</p>
+							                   {% endif %} 
+							                </div>
+
+							                <div class="col-sm-3 col-xs-12">
+							                    <a href='/cancelorder/{{order.id|urlencode}}/' class="btn btn-danger" >Cancel Order</a>
+							                    <!-- <p>Delivery Expected By</p>
+							                    <p><b>15 April 2020</b> </p> -->
+							                  
+							                </div>
+							            </div>
+
+            						<hr>
+								    </div><!-- .End .tab-pane -->
+								   	{% endfor %}	
+
+								    <div class="tab-pane fade" id="tab-address" role="tabpanel" aria-labelledby="tab-address-link">
+
+								    	<div class="row">
+								    		<div class="col-lg-6">
+								    			<div class="card card-dashboard">
+								    				<div class="card-body">
+								    					<h3 class="card-title">Billing Address</h3><!-- End .card-title -->
+    													 <p>
+    														{{ orders.first_name }}&nbsp;&nbsp;{{ orders.last_name }} <br>
+                                                            {{ orders.phone}}<br>
+    														
+    														{{ orders.address1 }}<br>
+                                                            {{ orders.address2 }}<br>
+                                                            {{ orders.city }} &nbsp;{{orders.pincode}}<br>
+                                                            {{ orders.state}}<br>
+                                                         </p>
+														<!-- <a href="#">Edit <i class="icon-edit"></i></a></p> -->
+								    				</div><!-- End .card-body -->
+								    			</div><!-- End .card-dashboard -->
+                                            </div><!-- End .col-lg-6 -->
+                                         
+								    	</div><!-- End .row -->
+								    </div><!-- .End .tab-pane -->
+
+
+								    <div class="tab-pane fade" id="tab-wallet" role="tabpanel" aria-labelledby="tab-wallet-link">
+
+								    	<div class="row">
+								    		<div class="col-lg-6">
+								    			<div class="card card-dashboard">
+								    				<div class="card-body">
+								    					<h3 class="card-title">Wallet</h3><!-- End .card-title -->
+    													
+ 
+														    <div style="text-align: center;">
+														      <img src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw" alt="wallet" height="50px" width="50px">
+														  	{% for i in wallet %}
+														      <p class="amount">Rs {{i.current_balance}}</p>
+														    </div>
+
+														    <div class="btn-group text-center">
+														        <button class="bt outline-light" onclick="document.getElementById('popup').style.display='block'">Add money</button>
+														    </div>
+
+														    <form id="popup" class="container-fluid" method="POST" action="/addmoney/">
+														      {% csrf_token %}
+														        <div class="row">
+														            <p style="font-size: 1.7em;" class="col-sm-6" style="">Amount</p>
+														         	<div class="col-sm-6" style=" margin-top: 0.5em;">
+														             	<input type="integer" name="amount">
+														          	</div>
+
+														          	<br>
+
+															          <p class="col-sm-6"></p>
+															            <p style="font-size: 1.7em;" class="col-sm-6" style="margin-top: 0.5em;">Mobile No</p>
+															          <div class="col-sm-6" style=" margin-top: 0.5em;">
+															            <input type="tel" name="phone">
+															          </div>
+
+															          <div style="text-align: center;" class="col-sm-6">
+															            <button class="btn btn-success" style="margin-top: 2em; ">Proceed to checkout</button>          
+															          </div>
+														        </div>
+														    </form>
+
+														
+
+														    <h4>History</h4>
+														          {% for j in history %}
+														            {% if j.typeofmoney == 'credit' %}
+														              <p class="txn-list">{{j.information}}<span class="credit-amount">+Rs {{j.value}}</span></p>
+														            {%else%}
+														             <p class="txn-list">{{j.information}}<span class="debit-amount">-Rs {{j.value}}</span></p>
+														            {%endif%}
+														          {% endfor %}
+														      {% endfor %}
+														<!-- <a href="#">Edit <i class="icon-edit"></i></a></p> -->
+								    				</div><!-- End .card-body -->
+								    			</div><!-- End .card-dashboard -->
+                                            </div><!-- End .col-lg-6 -->
+                                         
+								    	</div><!-- End .row -->
+								    </div><!-- .End .tab-pane -->
+
+
+
+
+								    <div class="tab-pane fade" id="tab-account" role="tabpanel" aria-labelledby="tab-account-link">
+			                			 <header>
+			                			 {% for i in user %}
+											<div class="name">
+											    {% if not i.image %}
+													<form method="POST" action="/updateimage/" enctype="multipart/form-data">
+											          {% csrf_token %}
+											           <input type="hidden" name="id" value='{{i.user_id}}'>
+											            <div>
+											              <img src="{% static '/assets/images/inuse/demoimage.jpg' %}"alt="Snow" height="200px" width="150px" style="display:inline-block;border-radius:50%;margin-top:10px;height:150px">
+											              <div class="image-upload">
+											                  <label for="file-input"><i class="material-icons">&#xe439;</i>
+											                  </label><input id="file-input" type="file" name="image"/>
+											               </div>
+											            </div>
+											            
+											            <button class="btn btn-success" style="background-color:#87cefa; border:1px solid #87cefa;  margin-top:5px;" type="submit">Upload Image</button> 
+											        </form> 
+											  
+											            {%else%}
+											                
+											          
+
+											            <form method="POST" action="/updateimage/" enctype="multipart/form-data" style="display:inline-block">
+											              {% csrf_token %}
+											                     <input type="hidden" name="id" value='{{i.user_id}}'>
+
+											                  <div>
+											                    <img src="{{i.image.url}}" name="image" id="image" height="200px" width="150px"  style="display:inline-block;border-radius:50%;margin-top:10px;height:150px"/>
+											                      <div class="image-upload">
+											                          <label for="file-input">
+											                              <i class="material-icons">&#xe439;</i>
+											                          </label>
+
+											                          <input id="file-input" type="file" name="image"/>
+											                      </div> 
+											                  </div>
+											                     <button class="btn btn-success" style="background-color:#87cefa; border:1px solid #87cefa; " type="submit">Update Image</button> 
+											              </form>  
+											            {%endif%}
+											                    
+											                
+											        </div>
+											    </header>
+
+
+											    <form method="POST" action="/updateprofile/" enctype="multipart/form-data" onsubmit="return(reviewval());" style="display:inline-block">
+											         {% csrf_token %}
+
+											        <input type="hidden" name="id" value='{{i.user_id}}'>
+											          
+											        <div class="form-group">
+											            <h3 style="margin-top:10px;"><i class="fa fa-user"></i> Personal Info</h3>
+											            <label id="UpdateFname">First Name</label>
+											            <input class="form-control" type="text" name = 'fname' placeholder="First name" style="width:200px;" id="fname" value="{{ i.user.first_name}}" >
+											        </div>
+
+											        <div class="form-group">
+											            <label id="UpdateLanme">Last Name</label>
+											            <input class="form-control" type="text" name='lname' placeholder="Last Name" style="width:200px;" id="lname" value="{{i.user.last_name}}">
+											        </div>  
+
+											        <div class="form-group">
+												        <label id="UpdateAdd">Address</label>
+												        <input class="form-control" type="text" name='city' placeholder="Address"  width="48" height="48" style="width:200px;" id="city" value="{{i.city}}">
+											        </div>
+
+											        <button class="btn btn-success" style="background-color:#87cefa; border:1px solid #87cefa; " id = "submitreview" type="submit" >Update Information</button> 
+											    	
+											    </form> 
+
+											</div>
+
+											        <div class='box text-center'>
+												        <p class="title"><i class="fa fa-info-circle" style="font-size:20px;"></i> Contact
+												        </p>
+												               
+												        <p><i class="fa fa-phone"></i>{{i.mobile}}</p>     
+	
+												        <p><i  class="fa fa-envelope"></i>{{i.user.email}}</p>                
+
+												        <p>
+												          {% if i.user_profile.city == '' %}
+												           <i class="fa fa-home"></i>Enter Address
+												          {%else%}
+												            <i class="fa fa-home"></i>
+												     		{{i.city}}
+												          {%endif%}  
+												        </p>
+											        </div>
+
+											        {% endfor %}
+											  
+
+										</div>
+								    </div><!-- .End .tab-pane -->
+								</div>
+	                		</div><!-- End .col-lg-9 -->
+	                	</div><!-- End .row -->
+	                </div><!-- End .container -->
+                </div><!-- End .dashboard -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+<script type="text/javascript">
+
+function reviewval()
+{
+  var v1=document.getElementById('fname').value
+  var v2=document.getElementById('lname').value
+  var v3=document.getElementById('city').value
+
+  var letters = /^[A-Za-z]+$/;
+
+  if(v1.length<=3)
+  {
+    alert("First Name should have atleast 3 character")
+    return false;
+  }
+
+  if(v2.length<=3)
+  {
+    alert("Last Name should have atleast 3 character")
+    return false;
+  }
+
+  if(v3.length<=10)
+  {
+    alert("Address should have atleast 20 character")
+    return false;
+  }
+  return true;
+
+}
+</script>
+
+
+   {% endblock content %}        

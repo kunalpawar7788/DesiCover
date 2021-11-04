@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PAYTM PAYMENT PAGE</title>
+    <script type="text/javascript" src="https://checkout.razorpay.com/v1/razorpay.js"></script>
+</head>
+<body>
+<h1> REDIRECTING TO MERCHANT</h1>
+<h1> PLEASE DO NOT REFRESH THE PAGE.............</h1>
+<body>
+    <form action="/addwallet/" method="POST">
+        {% csrf_token %} 
+
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="rzp_test_oQByQXLDQXLDDf"
+            data-amount={{tol_price}}
+            data-name="Desicovers"
+            data-description="Purchase Description"
+            data-image="vk.jpg"
+            data-netbanking="true"
+            data-description="Tron Legacy"
+            data-prefill.name={{first_name}}
+            data-prefill.email= {{email}}
+            data-prefill.contact={{phone}}
+            data-notes.shopping_order_id={{order_id}}>
+        </script>
+        <input type="hidden" name="shopping_order_id" value={{order_id}}>
+        <input type="hidden" name="amount" value={{tol_price}}>
+    </form>
+</body>
+</html>

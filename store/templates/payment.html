@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>payment</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+
+<!-- Razorpay Method -->
+<script type="text/javascript" src="https://checkout.razorpay.com/v1/razorpay.js"></script>
+
+
+	<style type="text/css">
+
+		body{
+			background: #f2f0eb;
+			font-family:'Montserrat', sans-serif;
+		}
+		.desktopDeliveryToBox p{
+			font-size: 80%;
+		}
+
+		.desktopDeliveryToBox, .desktopExpectedDelivery {
+		    border: 1px solid #eaeaea;
+		    background: #fff;
+		    border-radius: 4px;
+		    margin-bottom: 16px;
+		    padding: 0 0 0 14px;
+		}
+
+		.clearfix:after, .clearfix:before {
+			    content: " ";
+			    display: table;
+		}
+
+		.paymentBoxBody {
+    display: table;
+    width: 100%;
+    min-height: 500px;
+    border-top: 1px solid rgba(189, 189, 189, 0.4);
+}
+		
+		.paymentDeliveryLabel{
+			color: #181818;
+			background-color: rgba(24, 24, 24, 0.5);
+			padding: 3px 12px;
+			border-radius: 9px;
+    		text-transform: uppercase;
+
+		}
+
+		.paymentHeading{
+			background: white;
+			border: 1px solid #eaeaea;
+			padding: 24px 30px;
+		}
+		.deliveryTo{
+			padding: 12px 0px;
+		}
+		.deliveryHead{
+			margin: 0px 0px 10px;
+		}
+
+		.singlePaymentOption.active {
+    background: #fff;
+    border-right: 0;
+    border-left: 5px solid #51cccc;
+    padding-left: 15px;
+}
+
+
+	.singlePaymentOption {
+	background: #e9ecf2;
+    color: #868686;
+    font-size: 12px;
+    font-family:'Montserrat', sans-serif;
+    line-height: normal;
+    padding: 19px 20px;
+    text-transform: uppercase;
+    border-bottom: 1px solid hsla(0,0%,74.1%,.4);
+    border-right: 1px solid hsla(0,0%,74.1%,.4);
+    cursor: pointer;
+    width: 100%;
+}
+
+	.paymentTabDetail {
+	background: white;
+    display: table-cell;
+    vertical-align: top;
+    padding: 20px;
+}
+
+.paymentTablist{
+	padding: 0;
+
+}
+
+
+.mobileCreditCard .creditCardBox .xgroup input, .mobileCreditCard .creditCardBox .xgroup select {
+    width: 100%;
+    height: 30px;
+    padding: 8px 0;
+    font: 700 14px 'Montserrat', sans-serif;
+    outline: none;
+    border: none;
+    background: none;
+    display: block;
+    -webkit-appearance: none;
+    line-height: normal;
+    letter-spacing: .7px;
+    color: #181818;
+
+}
+.mobileCreditCard .creditCardBox .xgroup {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+		label {
+			    display: inline-block;
+			    max-width: 100%;
+			    margin-bottom: 5px;
+			    font-weight: 700;
+			    top: 7px;
+
+			}
+
+.activeLabel{
+	top: -15px;
+	/*font-size: 5px;*/
+	/*font-weight: 900;*/
+	/*letter-spacing: 6px;*/
+	text-transform: uppercase;
+}
+.mobileCreditCard .creditCardBox .xgroup label {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: .5;
+    color: #181818;
+    position: absolute;
+    left: 0;
+    /*top: 7px;*/
+    pointer-events: none;
+    transition: top .2s ease-in-out, font-size .2s ease-in-out;
+    margin: 0;
+}
+
+
+.xgroup {
+    width: 100%;
+    margin-bottom: 45px;
+    position: relative;
+    display: inline-block;
+}
+
+.xgroup input, .xgroup select {
+    width: 100%;
+    height: 29px;
+    padding: 5px 0;
+    font-size: 14px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #bcbcbc;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    display: block;
+    -webkit-appearance: none;
+    line-height: normal;
+}
+
+	.mobileCreditCard .creditCardBox .inputBox {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    outline: 1px solid #d9d9d9;
+    outline: none;
+    border-bottom: 1px solid #e6e6e6;
+    background: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+	.mobileCreditCard .expiryDetailBox {
+    width: 50%;
+    float: left;
+    padding-right: 16px;
+}
+
+	.mobileCreditCard .cvvDetailBox {
+    width: 40%;
+    padding-right: 16px;
+    float: left;
+}
+
+	.mobileCreditCard .cvvInfoBox {
+    width: 60%;
+    float: right;
+    margin-top: 5px;
+}
+	.mobileCreditCard .cvvInfoBox img {
+    width: 45px;
+    float: left;
+    margin-right: 9px;
+}
+
+	.mobileCreditCard .cvvInfoBox p {
+    font-size: 9px;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0,0,0,.5);
+    line-height: 13px;
+}
+
+	.mobileCreditCard .creditCardBox .customCheckbox {
+    float: left;
+    margin: 0 0 10px;
+    display: table;
+}
+	.payNowFixed {
+	    float: left;
+	    width: 100%;
+}
+	.actionButton {
+    display: block;
+    margin: 0 auto;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    z-index: 1;
+    background: #51cccc;
+    width: 100%;
+    border: none;
+    padding: 13px 0;
+    line-height: normal;
+}
+	.mobileCreditCard .creditCardBox .saveCardNote {
+    float: left;
+    font-size: 12px;
+    opacity: 0.8;
+    line-height: normal;
+}
+.mobileCreditCard .saveCardNote {
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0,0,0,.5);
+    margin-bottom: 15px;
+}
+	.mobileCreditCard .creditCardBox .customCheckbox input {
+   
+    padding-right: 10px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+}
+	.changeDeliveryAddress {
+    color: rgb(81, 204, 204);
+    font-family: montserrat, sans-serif;
+    font-size: 12px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+	
+	@media only screen and (min-width: 769px){
+	.mobileCreditCard .creditCardBox .customCheckbox input {
+	    font-size: 11px;
+	}
+
+	.mobileCreditCard .creditCardBox .saveCardNote {
+    font-size: 11px;
+    margin-top: 8px;
+	}
+	.detailBoxWrapper, .fullWalletWrapper {
+    margin-bottom: 7px;
+	}
+	
+
+	.detailBoxWrapper h5, .fullWalletWrapper h5{
+	    color: rgb(255, 255, 255);
+	    display: inline-block;
+	    font-size: 10px;
+	    font-weight: 700;
+	    line-height: 16px;
+	    margin-left: 10px;
+	    text-align: center;
+	    height: 16px;
+	    width: 16px;
+	    vertical-align: middle;
+	    background: rgb(81, 204, 204);
+	    border-radius: 50%;
+	}
+	.changeDeliveryAddress {
+    float: right;
+	}
+}
+
+@media (max-width:700px) {
+		.addCardHeader{
+			transform: translateY(-10px);
+		}
+}
+
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-7">
+			<div class="desktopDeliveryToBox clearfix">
+				<div class="col-xs-12">
+					<h5 style="font-weight: bold;">Delivering to <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <a style="float: right;">Change Address</a></h5>
+					<div class="deliveryTo">
+						<div class="deliveryHead">
+							<h6 style="font-weight: bold;">{{first_name}}</h6>
+							<!-- <div>
+								<a class=" visible-xs">Change</a>
+								<label class="paymentDeliveryLabel">home</label>
+							</div> -->
+						</div>
+						<p>jai maharashtra chawl santosh bhuvan 
+						nallasopara (E) </p>
+						<p>Thane 401209, Maharashtra, India</p>
+					</div>
+				</div>
+			</div>
+			
+
+
+			<div class="paymentHeading"><h4>Choose Payment Method</h4></div>
+
+			<div class="paymentBoxBody">
+				<div class="paymentTablist col-sm-4">
+					<div id="testPaymentGateway-0" class="active singlePaymentOption">Credit &amp; Debit Cards</div>
+					<div id="testPaymentGateway-1" class=" singlePaymentOption">Net banking</div>
+					<div id="testPaymentGateway-2" class=" singlePaymentOption">Wallet</div>
+					<div id="testPaymentGateway-3" class=" singlePaymentOption">Paypal</div>
+					<div id="testPaymentGateway-4" class=" singlePaymentOption">Cash On Delivery<span class="codSubTitle">Cash Collection Charges: Costs ₹ 25 Extra</span></div>
+					<div id="testPaymentGateway-5" class=" singlePaymentOption">UPI</div>
+				</div>
+				<div class="paymentTabDetail col-sm-8"><div class="selectedPay"><div class="detailBoxWrapper col-xs-12 paymentOptionsWrpr">
+					<div class="paymentOptionsInner clearfix">
+						<form novalidate="" autocomplete="off"><ul></ul>
+						</form>
+						<div class="mobileCreditCard">
+							<div class="creditCardBox clearfix">
+								<div class="addCardHeader visible-xs">ADD NEW CARD</div>
+								<form class="fullWidthXs" novalidate="" autocomplete="off" id='DebitCard'>
+									{% csrf_token %}
+									<div class="ccForm clearfix">
+										<div class="inputBox">
+										<div class="xgroup">
+											<input type="integer" autocomplete="new-password" name="card_no" id='card_no' maxlength="12" required>
+											<label for="card_no">Card Number</label>
+											
+										</div>
+									</div>
+									<div class="inputBox">
+										<div class="xgroup">
+											<input autocomplete="new-password" name="card_name" id='card_name' required>
+											<label for="card_name">Name On Card</label>
+										</div>
+									</div>
+									<div class="expiryDetailBox">
+										<div class="inputBox">
+											<div class="xgroup">
+												<input type="tel" autocomplete="new-password" name="expiry_month" id='expiry_month' maxlength="2" required>
+												<label for="expiry_month">Expiry Month (MM)</label>
+											</div>
+										</div>
+									</div>
+									<div class="expiryDetailBox noPdRightXs">
+										<div class="inputBox">
+											<div class="xgroup">
+												<input type="tel" autocomplete="new-password" name="expiry_year" id='expiry_year' maxlength="4" required>
+												<label for="expiry_year">Expiry Year (YYYY)</label>
+										</div>
+									</div>
+								</div>
+								<div class="cvvDetailBox">
+									<div class="inputBox">
+										<div class="xgroup">
+											<input type="password" autocomplete="new-password" name="card_cvv" id="card_cvv" maxlength="3" required>
+											<label for="card_cvv">CVV</label>
+										</div>
+									</div>
+								</div>
+								<div class="cvvInfoBox">
+									<img src="https://images.bewakoof.com/web/group-9-2x.png" alt="">
+									<p> Last 3 digits printed on the back of your card </p>
+								</div>
+							</div>
+							<div class="customCheckbox">
+								<!-- <label><i class="icon_tick active"></i></label>
+								<label>Securely save this card for faster payments.</label> -->
+								<input type="checkbox" checked="checked" value="Security"> Securely save this card for faster payments.<br>
+							</div>
+							<div class="payNowFixed">
+								<button type="submit" class="actionButton undefined" onclick="verifydebit()"> PAY {{tol_price}}</button>
+							</div>
+						</form>
+						<p class="saveCardNote">This transaction you make is totally secure. We don't save your CVV number.</p>
+					</div>
+				</div>
+				<span id="SavedCard">
+					<div>
+						
+					</div>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>		
+</div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- 
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+<script type="text/javascript">
+	$('input').on('focusin', function(){
+		$(this).parent().find('label').addClass('activeLabel');
+	});
+	$('input').on('focusout', function(){
+		if(!this.value){
+			$(this).parent().find('label').removeClass('activeLabel');
+		}
+	});
+</script>
+<!-- 
+<script>
+	var razorpay = new Razorpay({
+  key: 'rzp_test_Npak9xvByCvtHX',
+    // logo, displayed in the payment processing popup
+  image: 'https://i.imgur.com/n5tjHFD.png',
+});
+</script> -->
+
+<script>
+	var razorpay = new Razorpay({
+  key: 'rzp_test_Npak9xvByCvtHX',
+    // logo, displayed in the payment processing popup
+  image: 'https://i.imgur.com/n5tjHFD.png',
+}); // as before
+razorpay.once('ready', function(response) {
+  console.log(response.methods);
+})
+
+
+</script>
+
+  <script>
+    function verifydebit() 
+    {
+    	var card=$('#card_no').val()
+      alert(card)
+      // var url = $("#personForm").attr("data-cities-url");  // get the url of the `load_cities` view
+        // get the selected country ID from the HTML input
+      $.ajax({                       // initialize an AJAX request
+        type: 'POST',
+        url: '/ajax/verifypayment/',
+        data: 
+       {
+            card_no:$('#card_no').val(),
+            card_name:$('#card_name').val(),
+            expiry_month:$('#expiry_month').val(),
+            expiry_year:$('#expiry_year').val(),
+            card_cvv:$('#card_cvv').val(),
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function (data) {  // `data` is the return of the `load_cities` view function
+          alert(data)  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    }
+  </script>
+
+</body>
+</html>

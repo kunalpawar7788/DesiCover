@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+
+<a href="/export_users_csv" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Customer All Data</a>
+
+<a href="/export_users_csv_day" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Customer Oneday Data</a>
+
+
+<a href="/export_users_csv_week" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Customer Week Data</a>
+
+<a href="/export_users_csv_month" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Customer Month Data</a>
+
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form method="get">
+                {{ myFilter.form.as_p }}
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+</div>
+
+ <table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+        <tr>     
+
+            <th>User Picture</th> 
+            <th>Name</th>    
+            <th>Mobile No</th>
+            <th>Email</th>  
+            <th>City</th>
+            <th>Joining Date</th>                            
+        </tr>  
+    </thead>  
+    <tbody>  
+        {% for order in cust %}  
+        <tr> 
+            {% if order.image %}
+            <td><img src="{{order.image.url}}" height="100" width="100"></td>
+            {% else%}
+            <td><img src="{% static '/assets/images/inuse/demoimage.jpg' %}"alt="Snow" height="100" width="100"></td>
+            {%endif %}
+          
+            <td>{{order.user.first_name}} &nbsp;&nbsp;{{order.user.last_name}}</td>
+            <td>{{ order.mobile}}</td>
+            <td>{{order.user.email}}</td>
+            <td>{{ order.city }}</td>
+            <td>{{order.date}}</td>
+        </tr>
+        {% endfor %}  
+
+{% endblock content %}

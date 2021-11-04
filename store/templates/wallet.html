@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+      body{
+        background-color: #3fb0ef !important;
+      }
+      .container{
+        background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjOvSperRYjHH9-EHlKZJBfwvXy4rJpyerzHQsnp8DuuycYU5_);
+        /*background-color: #1f294f;*/
+        margin-top: 2em;
+        color: white;
+      }
+      #popup{
+        display: none;
+        background-color: white;
+        color: black;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      .bt{
+          margin: 8px;
+        border-radius: 20px !important;
+        font-size: 12px;
+          background-color: transparent;
+          padding: 8px 12px;
+      }
+      .outline-light{
+        border-color: #f8f9fa;
+        color: #f8f9fa;
+      }
+      .bt:hover{
+        background-color: #f8f9fa;
+        color: black; 
+      }
+      .txn-list {
+      background-color: #fff;
+      padding: 12px 10px; 
+      color: #777;
+      font-size: 14px;
+      margin: 7px 0;
+    }
+    .debit-amount {
+      color: red;
+      float: right;
+    }
+
+    .credit-amount {
+      color: green;
+      float: right;
+    }
+
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <h4>My Wallet</h4>
+    <div style="text-align: center;">
+      <img src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw" alt="wallet" height="50px" width="50px">
+  {% for i in wallet %}
+      <p class="amount">Rs {{i.current_balance}}</p>
+    </div>
+
+    <div class="btn-group text-center">
+        <button class="bt outline-light" onclick="document.getElementById('popup').style.display='block'">Add money</button>
+    </div>
+
+    <form id="popup" class="container-fluid" method="POST" action="/addmoney/">
+      {% csrf_token %}
+        <div class="row">
+            <p style="font-size: 1.7em;" class="col-sm-6" style="">Amount</p>
+          <div class="col-sm-6" style=" margin-top: 0.5em;">
+             <input type="integer" name="amount">
+          </div>
+          <br>
+
+          <p class="col-sm-6"></p>
+              <p style="font-size: 1.7em;" class="col-sm-6" style="margin-top: 0.5em;">Mobile No</p>
+          <div class="col-sm-6" style=" margin-top: 0.5em;">
+            <input type="tel" name="phone">
+          </div>
+
+          <div style="text-align: center;" class="col-sm-6">
+            <button class="btn btn-success" style="margin-top: 2em; ">Proceed to checkout</button>          
+          </div>
+        </div>
+      </form>
+
+   </div>
+
+         <h4>History</h4>
+          {% for j in history %}
+            {% if j.typeofmoney == 'credit' %}
+              <p class="txn-list">{{j.information}}<span class="credit-amount">+Rs {{j.value}}</span></p>
+            {%else%}
+             <p class="txn-list">{{j.information}}<span class="debit-amount">-Rs {{j.value}}</span></p>
+            {%endif%}
+          {% endfor %}
+      {% endfor %}
+
+</div>
+</div>
+</body>
+</html>

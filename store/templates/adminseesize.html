@@ -1,0 +1,26 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+
+ <table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+        <tr>               
+            <th>ID</th>
+            <th>SKU</th>
+            <th>CATEGORY</th>
+            <th>SIZE</th>           
+        </tr>  
+    </thead>  
+
+    <tbody>  
+    {% for i in size %}  
+        <tr> 
+            <td>{{ i.id}}</td> 
+            <td>{{ i.sku}}</td> 
+            <td>{{ i.category}}</td>
+            <td>{{i.small}} {{i.Medium}} {{i.large}} {{i.xl}} {{i.xxl}} </td>
+        </tr>                         
+    {% endfor %}  
+
+{% endblock content %}

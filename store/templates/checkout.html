@@ -1,0 +1,285 @@
+{% extends "basewhite.html" %}
+{% block content %}
+{% load static %}
+
+<script>
+function validateForm(pin)
+{
+
+first_name_input = document.getElementById('first_name_input');
+last_name_input = document.getElementById('last_name_input');
+pincode_input = document.getElementById('pincode_input');
+phone_input = document.getElementById('phone_input');
+email_input = document.getElementById('email_input');
+street1_input = document.getElementById('street_1_input')
+street2_input = document.getElementById('street_2_input')
+
+var bool_f_name = true;
+var bool_l_name = true;
+var bool_pincode =true;
+var bool_phone = true;
+var bool_email = true;
+var bool_street1 = true;
+var bool_street2 = true;
+
+first_name = document.getElementById('first_name');
+last_name  = document.getElementById('last_name');
+pinocde = document.getElementById('pincode');
+phone = document.getElementById('phone');
+email = document.getElementById('emailid');
+street1 =document.getElementById('street_1');
+street2 =document.getElementById('street_2');
+
+// console.log(pin.indexOf(pincode_input.value))
+
+if(phone_input.value.match(/^\d{10}$/) == null){
+phone.style.display = "block"
+bool_phone = false;
+}
+else{
+	phone.style.display ="none"
+	bool_phone = true
+}
+
+if(email_input.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) == null){
+     email.style.display = "block"
+    bool_email = false;
+}
+else{email.style.display = "none"
+bool_email = true;
+}
+console.log(typeof (pincode_input.value))
+console.log(typeof  parseInt(pincode_input.value))
+console.log(pin.indexOf(parseInt(pincode_input.value)))
+
+if(pin.indexOf(parseInt((pincode_input.value))) == -1){
+	pincode.style.display = "block"
+	 bool_pincode = false;  
+}
+else{
+	pincode.style.display = "none"
+	bool_pincode = true
+}
+
+if(first_name_input.value.match(/^[A-Za-z]+$/) == null){
+	first_name.style.display = "block"
+	bool_f_name = false
+}
+else{first_name.style.display = "none"
+bool_f_name = true}
+
+if(last_name_input.value.match(/^[A-Za-z]+$/) == null ){
+	last_name.style.display = "block"
+	bool_l_name = false
+}
+else{last_name.style.display = "none"
+bool_l_name = true}
+
+
+if(street1_input.value.match(/^[0-9a-zA-Z_()\-\,\.\s]+$/) == null)
+{street1.style.display = "block"
+bool_street1 = false}
+else{
+	street1.style.display = "none"
+	bool_street1 = true
+}
+
+if(street2_input.value.match(/^[0-9a-zA-Z_()\-\,\.\s]+$/) == null){
+	street2.style.display = "block"
+	bool_street2 = false
+}
+else{
+	street2.style.display = "none"
+	bool_street2 = true
+}
+console.log(bool_email)
+console.log(bool_f_name)
+console.log(bool_l_name)
+console.log(bool_phone)
+console.log(bool_pincode)
+console.log(bool_street1)
+console.log(bool_street2)
+return bool_email && bool_f_name && bool_l_name && bool_phone && bool_pincode && bool_street1 && bool_street2;
+
+}
+</script>
+
+        <main class="main">
+        	
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        
+                        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+            	<div class="checkout">
+	                <div class="container">
+            		{% if messages %}
+					  <ul class="messages">
+				   		{% for message in messages %}
+						     <div class="alert alert-error"style='color: red'>{{ message }}</div>
+						{% endfor %}
+					  </ul>
+					{% endif %}
+	<form method="POST" action="/checkout/" onsubmit="return validateForm({{pincodes}})">
+            			 
+                         {% csrf_token %}
+		                	<div class="row">
+		                		<div class="col-lg-9">
+		                			<h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+		                				<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>First Name</label>
+                                                <input type="text" class="form-control" name='first_name' id = 'first_name_input' required>
+
+		                					</div><!-- End .col-sm-6 -->
+                                            <div class="col-sm-6">
+		                					<h6 id ="first_name" style = "display:none">Your First name should only be charaacters.</h6>
+		                					</div>
+		                					<div class="col-sm-6">
+		                						<label>Last Name</label>
+                                                <input type="text" class="form-control" name='last_name' id = 'last_name_input' required>
+                                                
+                                            </div><!-- End .col-sm-6 -->
+                                            <div class="col-sm-6">
+                                                <h6 id ="last_name" style = "display:none">Your Last name should only be charaacters.</h6>
+                                                </div>
+		                				</div><!-- End .row -->
+
+	            						<label>Street address 1</label>
+                                        <input type="text" class="form-control" placeholder="House number and Street name" name='address1' id = "street_1_input" required>
+										<div class="col-sm-6">
+											<h6 id ="street_1" style = "display:none">Address 1 must only be alphnumeric.</h6>
+											</div> 
+                                        <label>Street address 2</label>
+                                        <input type="text" class="form-control" placeholder="Appartments, suite, unit etc ..."  name='address2' id  = 'street_2_input' required>
+										<div class="col-sm-6">
+											<h6 id ="street_2" style = "display:none">Address 2 must only be alphnumeric.</h6>
+											</div> 
+
+	            						<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>City</label>
+                                                <input type="text" class="form-control"  name='city' required>
+                                              
+		                					</div><!-- End .col-sm-6 -->
+                                            
+		                					<div class="col-sm-6">
+		                						<label>State</label>
+                                                <input type="text" class="form-control" name='state' required>
+                                            
+		                					</div><!-- End .col-sm-6 -->
+		                				</div><!-- End .row -->
+
+		                				<div class="row">
+		                					<div class="col-sm-6">
+		                						<label>Pincode</label>
+                                                <input type="text" class="form-control" name='pincode' id = 'pincode_input' required>
+                                              
+		                					</div><!-- End .col-sm-6 -->
+                                            <div class="col-sm-6">
+                                                <h6 id ="pincode" style = "display:none">Please enter a valid pincode.(Eg. 400060)</h6>
+                                                </div>
+		                					<div class="col-sm-6">
+		                						<label>Phone</label>
+                                                <input type="tel" class="form-control" name='phone' id  = 'phone_input' required>
+                                             
+                                            </div><!-- End .col-sm-6 -->
+                                            <div class="col-sm-6">
+                                                <h6  id ="phone" style = "display:none">Please enter a valid phone number.</h6>
+                                                </div>
+		                				</div><!-- End .row -->
+
+	                					<label>Email address</label>
+                                        <input type="email" class="form-control" name='email' id = 'email_input' required>
+                                        <div class="col-sm-6">
+		                					<h6 id ="emailid" style = "display:none">Please enter a valid email address.</h6>
+		                					</div>
+                                        <div class="row">
+                                        	<div class="col-sm-6">
+		                						<label>Cash On Delivery</label>
+                                                <input type='radio' class="collapsed" name='internet' value='COD' required>
+                                              
+		                					</div><!-- End .col-sm-6 -->
+
+		                					<div class="col-sm-6">
+		                						<label>Internet Banking/Paytm</label>
+                                                <input type="radio" class="collapsed" name='internet' value='Prepaid' required>
+                                             
+		                					</div><!-- End .col-sm-6 -->
+		                				</div>
+
+                                       
+                                       
+                                </div><!-- End .col-lg-9 -->
+                            </form>
+                               
+		                		<aside class="col-lg-3">
+                                     
+                                <br>
+                                <br>
+		                			<div class="summary">
+		                				<h3 class="summary-title">Your Order</h3><!-- End .summary-title -->
+
+		                				<table class="table table-summary">
+		                					<thead>
+		                						<tr>
+		                							<th>Product</th>
+		                							<th>Quantity</th>
+		                							<th>Price</th>
+		                							<th>Total</th>
+		                						</tr>
+		                					</thead>
+                                           
+		                					<tbody>
+                                                {% for product in products %}
+		                						<tr>
+		                							<td><a href="/product/{{product.product_id.id}}">{{product.title|slice:"0:40"}}...</a></td>
+		                							<td class="quantity-col">{{product.quantitys}}</td>
+		                							<td>{{product.price}}</td>
+		                							<td> {% widthratio product.quantitys 1 product.price %}</td>
+		                						</tr>
+                                                {% endfor %}
+		                						<!-- <tr>
+		                							<td><a href="#">Blue utility pinafore denimdress</a></td>
+		                							<td>&#x20b9 76,00</td>
+		                						</tr> -->
+		                						<tr class="summary-subtotal">
+		                							<td>Subtotal:</td>
+		                							<td>&#x20b9 {{tol_price}}</td>
+		                						</tr><!-- End .summary-subtotal -->
+		                						<tr>
+		                							<td>Shipping:</td>
+		                							<td>Free shipping</td>
+		                						</tr>
+		                						
+		                						<!-- /tr> --><!-- End .summary-total -->
+                                            </tbody>
+                                           
+		                				</table><!-- End .table table-summary -->
+
+		                				<div class="accordion-summary" id="accordion-payment">
+										 
+
+									
+
+		                				<button class="btn btn-outline-primary-2 btn-order btn-block">
+                                            <span class="btn-text">Place Order</span>
+                                            <span class="btn-hover-text">Proceed to Checkout</span>
+		                					
+		                				</button>
+		                			</div><!-- End .summary -->
+		                		</aside><!-- End .col-lg-3 -->
+		                	</div><!-- End .row -->
+            			
+	                </div><!-- End .container -->
+                </div><!-- End .checkout -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+ {% endblock content %}

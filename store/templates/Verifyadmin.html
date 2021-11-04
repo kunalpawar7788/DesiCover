@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>OTP VERIFICATION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="{% static 'img/ad.png' %}"/>
+
+</head>
+<style type="text/css">
+
+body {
+    font-size: 0.9em;
+    color: #212121;
+    font-family: Arial;
+    
+}
+
+.container{
+	  width: 350px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+
+#frm-mobile-verification {
+    border: #E0E0E0 1px solid;
+    border-radius: 3px;
+    padding: 30px;
+    text-align: center;
+}
+.form-heading {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.form-row {
+    margin-bottom: 30px;
+}
+
+.form-input {
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: #E0E0E0 1px solid;
+}
+.btnSubmit {
+    background: green;
+    padding: 8px 20px;
+    border: #47abef 1px solid;
+    border-radius: 3px;
+    width: 100%;
+    color: #FFF;
+}
+
+
+#partitioned {
+  padding-left: 15px;
+  letter-spacing: 42px;
+  border: 0;
+  background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 50px 1px;
+  background-repeat: repeat-x;
+  background-position-x: 35px;
+  width: 220px;
+  min-width: 200px;
+  margin-left: 20%;
+
+}
+
+#divInner{
+  left: 0;
+  position: sticky;
+}
+
+#divOuter{
+  width: 250px; 
+  overflow: hidden;
+}
+
+
+@media only screen and (max-width: 600px) 
+{
+    .main
+    {
+        width: 100%;
+    }
+    #form{
+    width: 100%;
+    margin: auto;
+    }
+}
+
+</style>
+
+<body>
+<center>
+	<div class="container">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <div class="alert alert-success"style='color: green'>{{ message }}</div>
+        {% endfor %}
+      </ul>
+    {% endif %}
+		<form id="frm-mobile-verification" name="reg" method='POST' action="/verifyadminotp/">
+		{% csrf_token %}  
+   			<div class="form-heading">OTP is sent to Your Mobile Number</div>
+	   		  <div class="form-row">
+				<div id="divOuter">
+		          <div id="divInner">
+		            <br><br>
+		             <input type="text" id="partitioned" name="otp" placeholder="XXXX" maxlength="4" />
+                
+		         	<br><br>
+			 	  </div>
+			    </div>
+		     
+			<button type="submit" name="Submit" class="btnSubmit">Verify</button>
+		</form>	 
+	<!-- 	<p>Forget OTP?<a href="/smsotpsend">Resend OTP</a></p> -->
+		 </div>
+
+        </div>
+	   </div>
+	</div>
+</center>
+</body>
+</html>

@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<style type="text/css">
+.col-md-3
+{
+display: inline-block;
+margin-left:-4px;
+}
+
+.carousel-indicators .active {
+background-color: white;
+  }
+
+.col-md-3 img{
+
+max-width: 227px;
+height: 242px;
+}
+
+body .carousel-indicator li{
+background-color: blue;
+}
+
+body .carousel-indicators{
+bottom: 0;
+}
+
+body .carousel-control-prev-icon,
+body .carousel-control-next-icon
+{
+background-color: blue;
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+top: auto;
+  bottom: auto;
+}
+ body .no-padding{
+ padding-left: 0,
+ padding-right: 0;
+ }
+</style>
+
+        <main class="main">
+        <br> <br>
+        <br>
+       
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                {% if img1 != 0%}
+                   <a href="/mobilecover/{{img1.model_name}}" ><img class="d-block w-100" src="{{ img1.images.url }}"
+                      alt="First slide" width="100%" height="=60%"></a>
+                  </div>
+                  {% endif %}
+                {% if img2 != 0%}
+                  <div class="carousel-item">
+                   <a href="/mobilecover/{{img2.model_name}}" ><img class="d-block w-100" src="{{ img2.images.url }}"
+                      alt="Second slide" width="100%" height="=60%"></a>
+                  </div>
+                {% endif %}
+                {% if img3 != 0%}
+                  <div class="carousel-item">
+                    <a href="/mobilecover/{{img3.model_name}}" ><img class="d-block w-100" src="{{ img3.images.url }}"
+                      alt="Third slide" width="100%" height="=60%"></a>
+                  </div>
+                  {% endif %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+
+          
+           <br>  
+            <div class="container">
+                <div class="heading text-center mb-4">
+                    <h2 class="title">Product Categories</h2><!-- End .title -->
+                    <p class="title-desc">Aliquam tincidunt mauris eurisus</p><!-- End .title-desc -->
+                </div><!-- End .heading -->
+            <div class="row">
+              {% for j in home %}
+
+                {% if j.name == 'tshirt' %}
+                <div class="col-sm-6 col-lg-4">
+                    <div class="banner banner-display banner-link-anim">
+                       
+                        <a href="#">
+                            <!-- <img src="{% static '/assets/images/inuse/t-shirt-banner.png' %}" alt="Banner"> -->
+                            <img src="{{j.img.url}}" alt="Banner"/>
+                        </a>
+
+                        <div class="banner-content banner-content-center">
+                            <h3 class="banner-title text-white"><a href="/tshirt">T-shirt</a></h3><!-- End .banner-title -->
+                        
+                            <a href="/tshirt" class="btn btn-outline-white banner-link">Shop Now</a>
+                        </div><!-- End .banner-content -->
+                    </div><!-- End .banner -->
+                </div><!-- End .col-sm-6 -->
+                {% endif %}
+
+                 {% if j.name == 'mobile' %}
+                <div class="col-sm-6 col-lg-4 order-lg-last">
+                    <div class="banner banner-display banner-link-anim">
+                        <a href="#">
+                            <!-- <img src=" {% static '/assets/images/inuse/mobile-cover-banner.png' %}" alt="Banner"> -->
+                            <img src="{{j.img.url}}" alt="Banner"/>
+                        </a>
+
+                        <div class="banner-content banner-content-center">
+                            <h3 class="banner-title text-white"><a href="/cover">Mobile Covers</a></h3><!-- End .banner-title -->
+                         
+                            <a href="/cover" class="btn btn-outline-white banner-link">Shop Now</a>
+                        </div><!-- End .banner-content -->
+                    </div><!-- End .banner -->
+                </div><!-- End .col-sm-6 -->
+              {% endif %}
+
+               {% if j.name == 'pop' %}
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-12">
+                            <div class="banner banner-display banner-link-anim">
+                                <a href="#">
+                                    <!-- <img src=" {% static '/assets/images/inuse/pop-banner-1.png' %}" alt="Banner"> -->
+                                    <img src="{{j.img.url}}" alt="Banner"/>
+                                </a>
+
+                                <div class="banner-content banner-content-center">
+                                    <h3 class="banner-title text-white"><a href="#">Pop Socket</a></h3><!-- End .banner-title -->
+                            
+                                    <a href="/popsocket" class="btn btn-outline-white banner-link">Discover Now</a>
+                                </div><!-- End .banner-content -->
+                            </div><!-- End .banner -->
+                        </div><!-- End .col-sm-6 -->
+                {% endif %}
+
+                 {% if j.name == 'mug' %}
+                        <div class="col-sm-6 col-lg-12">
+                            <div class="banner banner-display banner-link-anim">
+                                <a href="#">
+                                  <!--   <img src=" {% static '/assets/images/inuse/mug-banner-2.png' %}" alt="Banner"> -->
+                                  <img src="{{j.img.url}}" alt="Banner"/>
+                                </a>
+
+                                <div class="banner-content banner-content-center">
+                                    <h3 class="banner-title text-white"><a href="#">Mugs</a></h3><!-- End .banner-title -->
+                                    <a href="/mugs" class="btn btn-outline-white banner-link">Shop Now</a>
+                                </div><!-- End .banner-content -->
+                            </div><!-- End .banner -->
+                        </div><!-- End .col-sm-6 -->
+                          {% endif %}
+                    {% endfor %}
+                    </div><!-- End .row -->
+                </div><!-- End .col-lg-6 -->
+            </div><!-- End .row -->
+        </div>
+
+          
+        <div>
+          <h2 class="title">Product Categories</h2><!-- End .title -->
+            {% for product, range, nSlides in allProds %}
+                    
+                <div id="demo0{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
+                    <ul class="carousel-indicators">
+                      <li data-target="#demo0{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                          {% for i in range %}
+                            <li data-target="#demo0{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
+                          {% endfor %}
+                        </ul>
+
+                       <div class="product product-4">
+                          <div class="carousel-item active" style="background:#f2f2f2;border:none">
+                            {% for i in product %}
+                              <div class="col-xs-3 col-sm-3 col-md-3" style="background:#f2f2f2">
+                                <div class="card" style="width: 100%;border-radius:10px">
+                                  <h5 class="card-title"><a href ="/product/{{i.products.id}}"><b>{{i.products.title}}</b></a></h5>
+                                   <a href="/product/{{i.products.id}}"><img src='/media/{{i.products.images3}}' class="card-img-top" alt="..." ></a>
+                                  
+                                  <div class="card-body">
+                                    <h5 class="card-title" style="color: black;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> 
+                                        <a href="/product/{{i.products.id}}">
+                                          <b>{{i.products.title}}</b>
+                                        </a>
+                                    </h5>
+                                    <p class="card-text" style="color: black;">
+                                        <b><span class="fa fa-rupee"><span>{{i.products.price}}/-</b>
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+                            </div>
+                            <div class="carousel-item" style="background:#f2f2f2;border:none">
+                              {% endif %}
+
+                              {% endfor %}
+                          </div>
+                      </div>
+                    </div>
+            
+                          <!-- left and right controls for the slide -->
+                          <a style="position:absolute;top:1550" class="carousel-control-prev" href="#demo0{{forloop.counter}}" data-slide="prev">
+                              <span class="carousel-control-prev-icon"></span>
+                          </a>
+                          <a style="position:absolute;top:1550" class="carousel-control-next" href="#demo0{{forloop.counter}}" data-slide="next">
+                              <span class="carousel-control-next-icon"></span>
+                          </a>
+                      
+                          {% endfor %}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+
+
+            
+
+            <div class="container">
+
+                <div class="icon-boxes-container bg-transparent">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="icon-box icon-box-side">
+                                    <span class="icon-box-icon">
+                                        <i class="icon-rocket"></i>
+                                    </span>
+                                    <div class="icon-box-content">
+                                        <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
+                                        <p>Orders &#x20b950 or more</p>
+                                    </div><!-- End .icon-box-content -->
+                                </div><!-- End .icon-box -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="icon-box icon-box-side">
+                                    <span class="icon-box-icon">
+                                        <i class="icon-rotate-left"></i>
+                                    </span>
+
+                                    <div class="icon-box-content">
+                                        <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
+                                        <p>Within 30 days</p>
+                                    </div><!-- End .icon-box-content -->
+                                </div><!-- End .icon-box -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="icon-box icon-box-side">
+                                    <span class="icon-box-icon">
+                                        <i class="icon-info-circle"></i>
+                                    </span>
+
+                                    <div class="icon-box-content">
+                                        <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
+                                        <p>When you sign up</p>
+                                    </div><!-- End .icon-box-content -->
+                                </div><!-- End .icon-box -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="icon-box icon-box-side">
+                                    <span class="icon-box-icon">
+                                        <i class="icon-life-ring"></i>
+                                    </span>
+
+                                    <div class="icon-box-content">
+                                        <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
+                                        <p>24/7 amazing services</p>
+                                    </div><!-- End .icon-box-content -->
+                                </div><!-- End .icon-box -->
+                            </div><!-- End .col-sm-6 col-lg-3 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .container -->
+                </div><!-- End .icon-boxes-container -->
+            </div><!-- End .container -->
+        </main><!-- End .main -->
+{% endblock content %}
+      

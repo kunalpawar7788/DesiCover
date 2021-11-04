@@ -1,0 +1,102 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+ 
+<h1>Add Title</h1>
+<form action="{% url 'mobilename' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+    {% csrf_token %}  
+    <div class="form-group">
+        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Company Name </label>
+        <div class="col-md-8">
+          {{form.company}}
+        </div>                    
+    </div>
+
+      <div class="form-group">
+        <label class="col-md-3 col-sm-3 col-xs-12 control-label">Model Name </label>
+        <div class="col-md-8">
+          {{form.mobilename}} 
+        </div>                    
+    </div>
+
+
+  <div class="form-group">                    
+      <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+           <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Upload </button>
+      </div> 
+  </div>
+  </form>
+<br>
+<br>
+  <table id="gallery" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Company Name</th>
+      <th>Model Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for photo in photos %}
+      <tr id="users-{{photo.id}}">
+
+        <td>{{ photo.id }}</td>
+        <td class="Company userData">{{photo.company}}</td>
+        <td  class="Model userData">{{ photo.mobilename}}</td>
+        <td><button class="btn btn-success" style="background-color:#87cefa;border-color:#87cefa;" onClick="editUser({{photo.id}})" data-toggle="modal" data-target="#myModal">Edit Review</button>
+        <a href="/mobiledestroy/{{ photo.id }}" class='btn btn-danger'>Delete</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel" >Update Cover Name</h4>
+        </div>
+        <form method="POST" action="/updatemobile/">
+          {% csrf_token %}  
+          <div class="modal-body">
+              <input class="form-control" id="form-id" type="hidden" name="id"/>
+              <label for="name">Company Name</label>
+              <input class="form-control" id="form-Review" type="text" name="company"/>
+              <label for="address">Model Name</label>
+              <input class="form-control" id="form-rating" type="text" name="name"/>
+            
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" >Save changes</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form> 
+      </div>
+    </div>
+  </div>   
+
+    
+
+</div>
+<script type="text/javascript">
+
+function editUser(id) 
+{
+  if (id) 
+  {
+
+    tr_id = "#users-" + id;
+    Review = $(tr_id).find(".Company").text();
+    rating = $(tr_id).find(".Model").text();
+    $('#form-id').val(id);
+    $('#form-Review').val(Review);
+    $('#form-rating').val(rating);
+  
+  }
+}
+</script>
+{% endblock content %}
+

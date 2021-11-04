@@ -1,0 +1,247 @@
+{% extends "basewhite.html" %}
+{% block content %}
+{% load static %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav><!-- End .breadcrumb-nav -->
+
+            <div class="page-content">
+            	<div class="cart">
+	                <div class="container">
+	                	<div class="row">
+	                		<div class="col-lg-9">
+	                			<table class="table table-cart table-mobile">
+									<thead>
+										<tr>
+											<th>Product</th>
+											<th>Price</th>
+											<th>Quantity</th>
+											<th>Total</th>
+											<th></th>
+										</tr>
+									</thead>
+                                    {% for pick in productsPick %}
+									<tbody>
+
+									 <form method="POST" action="/submitcart/" id="form-id">
+									 	{% csrf_token %}
+										<tr id="users-{{pick.id}}">
+											
+											<td class="product-col">
+												<div class="product">
+													<figure class="product-media">
+														<a href="#">
+															<img src="{{pick.image.url}}" alt="Product image">
+														</a>
+													</figure>
+
+													<h3 class="product-title">
+														<a href="/product/{{pick.product_id.id}}">{{pick.title}}</a>
+													{% if pick.size != None %}
+														<p>Size:{{pick.size}}</p>
+													{% endif %}
+													</h3><!-- End .product-title -->
+												</div><!-- End .product -->
+											</td>
+									
+
+											<td class="price-col">  &#x20b9 {{pick.price}}</td>
+
+											<td class="Price usersPrice" style="display: none;">{{pick.price}}</td>
+
+											<td class="Total userstotal" style="display: none;">{{total_price}}</td>
+
+											<td class="Qty usersQty" style="display: none;">{{pick.quantitys}}</td>
+
+											<input type="hidden" name="id"  value='{{pick.id}}'/>
+											<input type="hidden" name="price"  value='{{pick.price}}'/>
+										
+											<td class="qty quantity-col">
+                                              <!--   <div class="cart-product-quantity"> -->
+                                               <input type="number" class="form-control" name='quantity' id='quantity' value="{{pick.quantitys}}" data-number="{{pick.quantity}}" min="1" max="10" step="1" 
+                                               onchange="change( {{pick.id}})" -decimals="0" required/>
+                                                  		
+                                                <!-- </div> --><!-- End .cart-product-quantity-->
+                                            </td>
+
+											<td class="total_price userstotal_price">  &#x20b9 {% widthratio pick.quantitys 1 pick.price %} </td>
+											<td class="remove-col"><button class="btn-remove"> <a href="/deletecart/{{ pick.id }}" class="close"><i class="icon-close"></i></button></td>
+                                        </tr>
+                                        {% endfor %}
+									</form>
+                       
+                       		 		
+	                			<div class="cart-bottom">
+
+			            			<div class="cart-discount">
+
+			            				<form action="/couponcheck/" method="POST" id='FORM-ID' >
+			            					{% csrf_token %}
+			            					<div class="input-group">
+													<style>
+													.dropbtn {
+													  background-color: transparent;
+													  color: black;
+													  padding: 7px 52px;
+													  font-size: 16px;
+													  border-color: #c96;
+													  cursor: pointer;
+													  margin-left: 11px;
+													}
+													
+													.dropdown {
+													  position: relative;
+													  display: inline-block;
+													}
+													
+													.dropdown-content {
+													  display: none;
+													  margin-left: 13px	;
+													  position: absolute;
+													  padding: 7px 57px;
+													  background-color: white;
+													  min-width: 120px;
+													  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+													  z-index: 1;
+													  margin-bottom: 50px;
+													}
+													
+													.dropdown-content a {
+													  color: black;
+													  background-color: white;
+													  padding: 12px 16px;
+													  text-decoration: none;
+													  display: block;
+													}
+													
+													.dropdown-content a:hover {background-color: #f1f1f1}
+													
+													.dropdown:hover .dropdown-content {
+													  display: block;
+													}
+													
+													.dropdown:hover .dropbtn {
+													  background-color: wheat;
+													}
+													</style>
+										
+													<body>
+													
+													<div class="dropdown">
+													  <button class="dropbtn">Coupon Code</button>
+													  <div class="dropdown-content">
+													  <a href="#">Coupon 1</a>
+													  <a href="#">Coupon 2</a>
+													  <a href="#">Coupon 3</a>
+													  </div>
+													</div>
+													
+													
+												<!-- <select name="cars" id="cars">
+													<option value="Coupon_Code">Coupon Code</option>
+													<option value="coupon1">Coupon 1</option>
+													<option value="coupon2">Coupon 2</option>
+													<option value="coupon3">Coupon 3</option>
+													<option value="coupon4">Coupon 4</option>
+												  </select> -->
+				        					<!-- <input type="text" class="form-control" required placeholder="coupon code" name="q" id="q"> -->
+
+				        					<div class="input-group-append"></div>
+												<button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-right"></i></button>
+												</div><!-- .End .input-group-append -->
+			        						</div><!-- End .input-group -->
+			            				</form>
+			            				{% if messages %}
+										    <ul class="messages">
+										      {% for message in messages %}
+										        <div class="alert alert-error"style='color: red'>{{ message }}</div>
+										        {% endfor %}
+										      </ul>
+										{% endif %}
+
+
+			            			</div><!-- End .cart-discount -->
+		            			</div><!-- End .cart-bottom -->
+
+	                		</div><!-- End .col-lg-9 -->
+	                		<aside class="col-lg-3">
+	                			<div class="summary summary-cart">
+	                				<h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
+
+	                				<table class="table table-summary">
+	                					<tbody>
+	                						<tr class="summary-subtotal">
+	                							<td>Total:&#x20b9</td>
+	                							<td> <button class="btn btn-success" onClick="Calculatecart()">Calculate Value</button></td>
+	                							
+	                							<td id='amount' data-number='0'>{{total_price}}</td>
+	                						</tr><!-- End .summary-subtotal -->
+	                					</tbody>
+	                				</table><!-- End .table table-summary -->
+
+	                				<a class="btn btn-outline-primary-2 btn-order btn-block" onclick="document.getElementById('form-id').submit();">PROCEED TO CHECKOUT</a>
+	                			</div><!-- End .summary -->
+
+		            			<a href="/home" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+		            			
+	                		</aside><!-- End .col-lg-3 -->
+	                	</div><!-- End .row -->
+	                </div><!-- End .container -->
+                </div><!-- End .cart -->
+            </div><!-- End .page-content -->
+        </main><!-- End .main -->
+
+
+<script type="text/javascript">
+
+function change(id) 
+{
+  if (id) 
+  {
+
+  	tr_id  = "#users-" + id;
+    Price  = $(tr_id).find(".Price").text();
+    total  = $(tr_id).find(".Total").text();//Total amount of purchase
+    qty    = $(tr_id).find("#quantity").val();
+    
+
+	var total_price=(Price*qty)
+   	$(tr_id).find('.total_price').html(total_price);
+  }
+}
+
+function Calculatecart() 
+{
+	alert("Mast")
+    $.ajax
+    ({
+	    type:'POST',
+	    url: '/calculation/',
+	    data: 
+	    {
+	       	form:JSON.stringify($("#form-id").serialize()),
+	       	csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+	    },
+	        
+	    dataType: 'json',
+	    success: function (data) 
+	    {
+
+	     	$('#amount').html(data)
+	    }
+    });
+}
+ 
+</script>
+
+   {% endblock content %}           
+

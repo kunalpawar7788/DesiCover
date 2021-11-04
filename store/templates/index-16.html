@@ -1,0 +1,747 @@
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+  </style>
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<html>
+  <head>
+<style>
+body {
+  font-family: Poppins;
+}
+#navbar{
+  position: fixed;
+  top: 0px;
+  z-index: 999999;
+  width: 100%;
+  ;
+}
+#myCarousel{
+  margin-top: 5%;
+}
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 55;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.openbtn {
+  display: none;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 4px 10px;
+  border: none;
+}
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 5px;
+}
+.navv{
+ 
+  margin-right: -100px;
+  display: inline;
+}
+.navv a{
+  color: #222;
+  text-decoration: none;
+ 
+  margin-left: 3em;
+  font-size: 1.3em;
+}
+.navb{
+  
+  display: inline;
+  float: right;
+  color: #222;
+  text-decoration: none;
+  margin-right: 1em;
+  font-size: 1.3em;
+}
+.inner-addon {
+  position: relative;
+  width: 300px;
+}
+
+/* style glyph */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+
+
+
+
+
+
+.itemimg{
+  width: 100%;
+}
+/* align glyph */
+.right-addon .glyphicon { right: 0px;}
+.aaa {
+  text-align: center;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  right: 10px;
+  transform: scaleY(0);
+  transition: transform 0.5s;
+}
+a:hover .aaa{
+  text-align: center;
+  background: rgba(0,0,0,0.8);
+  transform: scaleY(1.1);
+}
+a h3{
+  text-align: center;
+  padding: 2px 10px;
+  border: 1px solid white;
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  margin-top: 25%;
+}
+a h3:hover{
+  background: darkgray;
+}
+button{
+  text-shadow: 0px;
+  border-color: white;
+  background-color: white;
+}
+.bimg{
+  margin-top: 5%;
+  width: 100%;
+  height: 500px;
+}
+.vimg{
+  width: 100%;
+  height: 600px;
+}
+.space{
+  margin-top: 5%;
+}
+.roww{
+  text-align: center;
+  padding: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.roww h1{
+  font-size: 4em;
+}
+.roww p{
+  font-size: 1.5em;
+  color: #222;
+}
+.rowww{
+  padding: 0px;
+  margin-top: 20%;
+}
+.timg{
+  text-align: center;
+  padding: 0px;
+  height: 600px;
+  border: 3px solid #222;
+  display: inline-block;
+}
+.dimg{
+  border: 1px solid #222;
+  width: 200px;
+  height: 300px;
+}
+.ttimg{
+  padding: 0px;
+  height: 600px;
+}
+@media (max-width: 1135px){
+.navv a{
+  margin-left: 1.2em;
+  font-size: 1.3em;
+ }
+.itemimg{
+  width: 100%;
+}
+.navb{
+  display: inline;
+  float: right;
+  color: #222;
+  text-decoration: none;
+  margin-right: 1em;
+  font-size: 1.3em;
+}
+.inner-addon {
+  position: relative;
+  width: 200px;
+}
+
+.dimg{
+  margin-top: 20%;
+  width: 150px;
+  height: 200px;
+}
+#myCarousel{
+  margin-top: 7%;
+}
+}
+@media (max-width: 920px){
+
+#myCarousel{
+  margin-top: 15%;
+}
+ .openbtn{
+  display: inline-block;
+  float: left;
+  margin-bottom: 15px;
+ }
+ .navv{
+  display: none;
+ }
+.inner-addon {
+  /*margin-top: 10px;*/
+  position: relative;
+  width: 95%;
+}
+  a:hover .aaa{
+    text-align: center;
+    background: rgba(0,0,0,0.8);
+    transform: scaleY(1.3);
+  }
+  h3{
+    font-size: 0.8em;
+  }
+  .vimg{
+  width: 100%;
+  height: 400px;
+  }
+  .timg{
+    height: 400px;
+  }
+  .dimg{
+    margin-top: 10%;
+    width: 100px;
+    height: 150px;
+  }
+  .ttimg{
+    height: 400px;
+  }
+.roww h1{
+  font-size: 3em;
+}
+.roww p{
+  font-size: 1.2em;
+  color: #dbae25;
+}
+}
+@media (max-width: 600px){
+
+#myCarousel{
+  margin-top: 20%;
+}
+  .bimg{
+    margin-top: 10%;
+    width: 100%;
+    height: 300px;
+  }
+  .vimg{
+  width: 100%;
+  height: 300px;
+  }
+}
+@media (max-width: 430px){
+
+#myCarousel{
+  margin-top: 30%;
+}
+  .tt{
+    margin-bottom: 1em;
+  }
+  .vimg{
+  width: 100%;
+  height: 200px;
+  }
+  .timg{
+    height: 200px;
+  }
+  .rowww{
+    margin-top: 5%;
+  }
+  .dimg{
+    width: 60px;
+    height: 80px;
+  }
+  .ttimg{
+    height: 200px;
+  }
+.roww h1{
+  font-size: 2em;
+}
+.roww p{
+  font-size: 0.8em;
+  color: #dbae25;
+}
+.trend{
+  margin-left: 15%;
+}
+}
+@media (max-width: 340px){
+
+#myCarousel{
+  margin-top: 40%;
+}
+ .roww h1{
+  font-size: 1.2em;
+}
+.roww p{
+  font-size: 0.5em;
+  color: #dbae25;
+}
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 500px) {
+
+#myCarousel{
+  margin-top: 35%;
+}
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+          body .carousel-indicator li{
+          background-color: blue;
+          }
+
+          body .carousel-indicators{
+          bottom: 0;
+          }
+
+          body .carousel-control-prev-icon,
+          body .carousel-control-next-icon{
+          background-color: blue;
+          }
+
+          .carousel-control-prev,
+          .carousel-control-next{
+          top: auto;
+            bottom: auto;
+          }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-default" id="navbar">
+  <div style="background-color: #222; block-size: 30px;" class="container-fluid">
+    <a href="/contact" style="text-decoration: none;color: white; float: right;margin-right: 10px; font-size: 17px; margin-top: 3px;">CONTACT</a>
+    <a href="/contact" style="text-decoration: none;color: white; float: right;margin-right: 20px; font-size: 17px; margin-top: 3px;">FAQ</a>
+    <a href="" style="text-decoration: none;color: white; float: right;margin-right: 20px; font-size: 17px; margin-top: 3px;">TRACKING ORDER</a>    
+  </div>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
+      <a href="">MOBILE CASES</a>
+      <a href="">MEN</a>
+      <a href="">WOMEN</a>
+      <a href="/popsocket">POPSOCKETS</a>
+      <a href="">BADGES</a>
+      <a href="">SIGN IN</a>
+  </div>
+  <div id="main">
+    <button class="openbtn" onclick="openNav()"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+  </div>
+
+  
+  <div class="navv">
+    <div class="logonav" style="padding: 60px 10px 30px 2px; margin-top: -70px; display: inline; ">
+      <img src="{% static '/assets/images/inuse/logo.png' %}"  width="5%" height="5%"/>
+    </div>
+    <a href="">           </a>
+    <a href="/cover">MOBILE CASES</a>
+
+    <a href="">MEN</a>
+    {% for i in men %}
+      <div class="main-content">
+        <a href="/tshirt/MALE/{{i}}">{{i}}</a>
+      </div>
+    {% endfor %}
+
+    <a href="">WOMEN</a>
+    {% for j2 in women %}
+      <div class="main-content">
+        <a href="/tshirt/FEMALE/{{j2}}">{{j2}}</a>
+      </div>
+    {% endfor %}
+
+    <a href="/popsocket">POPSOCKETS</a>
+    <a href="#">BADGES</a>
+  </div>
+    <a href="/login" class="navb">SIGN IN</a>
+    <a href="" class="navb">DISCUSSION</a>
+    <a href="" class="navb"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+    <div class="inner-addon right-addon" style="display: inline-block;float: right; margin-right: 20px;">
+     <form>
+     <i class="glyphicon glyphicon-search" style="color: #222; "></i>
+     <input type="text" class="form-control" placeholder="Search" style="border-radius: 20px;" />
+     </form>
+    </div>
+</nav>
+
+
+
+
+
+
+
+<div class="container">
+
+
+
+  <div class="banner-fullwidth">
+    <style>
+      .banner-fullwidth{
+        animation: slider 9s infinite linear;
+        height: 60em;
+        width: 120em;
+        margin-left: -270px;
+        background-position: center;
+        position: relative;
+        margin-bottom: -80px;
+        margin-top: 100px;
+        background-image: url("{% static '/assets/images/inuse/DC8.jpeg' %}");
+        
+        background-size: 100% 100%;
+        box-shadow: 5px 5px 5px 5px gray;
+      }
+      @keyframes slider{
+        0%{
+          background-image: url("{% static '/assets/images/inuse/DC3.jpeg' %}");
+        }
+        35%{
+          background-image: url("{% static '/assets/images/inuse/DC4.jpeg' %}");
+        }
+        75%{
+          background-image: url("{% static '/assets/images/inuse/DC5.jpeg' %}");
+        }
+        125%{
+          background-image: url("{% static '/assets/images/inuse/DC6.jpeg' %}");
+        }
+        160%{
+          background-image: url("{% static '/assets/images/inuse/DC7.jpeg' %}");
+        }
+        200%{
+          background-image: url("{% static '/assets/images/inuse/DC8.jpeg' %}");
+        }
+      }
+      
+    </style>
+  </div>
+    </a>
+  </div>
+  </div>
+<div class="container-fluid row" style="margin:0 5%; margin-top: 5%;">
+    <div class=" col-xs-6 col-sm-3 tt"><a href=""><img src="https://cdn3.vectorstock.com/i/1000x1000/72/42/fast-and-free-shipping-delivery-truck-vector-21487242.jpg" width="100%"><span class="aaa"><h3>Shop now</h3></span></a></div>
+    <div class=" col-xs-6 col-sm-3 tt "><a href=""><img src="https://cdn3.vectorstock.com/i/1000x1000/72/42/fast-and-free-shipping-delivery-truck-vector-21487242.jpg" width="100%"><span class="aaa"><h3>Shop now</h3></span></a></div>
+    <div class=" col-xs-6 col-sm-3 tt"><a href=""><img src="https://cdn3.vectorstock.com/i/1000x1000/72/42/fast-and-free-shipping-delivery-truck-vector-21487242.jpg" width="100%"><span class="aaa"><h3>Shop now</h3></span></a></div>
+    <div class=" col-xs-6 col-sm-3 tt"><a href=""><img src="https://cdn3.vectorstock.com/i/1000x1000/72/42/fast-and-free-shipping-delivery-truck-vector-21487242.jpg" width="100%"><span class="aaa"><h3>Shop now</h3></span></a></div>       
+</div>
+
+
+<div class="container-fluid row" style="margin:0 5%; margin-top: 5%;">
+    <div class=" col-xs-6 col-sm-3 tt"><a href=""><img src="https://cdn3.vectorstock.com/i/1000x1000/72/42/fast-and-free-shipping-delivery-truck-vector-21487242.jpg" width="100%"><span class="aaa"><h3>Shop now</h3></span></a></div>
+    <div class=" col-xs-6 col-sm-3 tt "><a href=""><img src="https://cdn3.vectorstock.com/i/1000x1000/72/42/fast-and-free-shipping-delivery-truck-vector-21487242.jpg" width="100%"><span class="aaa"><h3>Shop now</h3></span></a></div>
+    <div class=" col-xs-6 col-sm-3 tt"><a href=""><img src="https://cdn3.vectorstock.com/i/1000x1000/72/42/fast-and-free-shipping-delivery-truck-vector-21487242.jpg" width="100%"><span class="aaa"><h3>Shop now</h3></span></a></div>
+    <div class=" col-xs-6 col-sm-3 tt"><a href=""><img src="https://cdn3.vectorstock.com/i/1000x1000/72/42/fast-and-free-shipping-delivery-truck-vector-21487242.jpg" width="100%"><span class="aaa"><h3>Shop now</h3></span></a></div>       
+</div>
+  <div class="container roww space">
+    <div class="timg col-xs-6 container-fluid">
+      <h1>Mobile cases</h1>
+      {% for i in word %}
+        {% if i.name == 'mobile' %}
+          <p>{{i.info}}</p>
+          {% endif %}
+      {% endfor %}
+        <div class="row">
+      {% for p in pro %}
+        {% if p.name == 'mobile' %}
+          
+          <a href="/product/{{p.prod.id}}" class="col-xs-6 rowww"><img src="{{p.prod.images1.url}}"  class="dimg"></a>
+          <h3 class="product-title">{{p.prod.title}}</h3><!-- End .product-title -->
+          <div class="product-price"> &#x20b9 {{p.prod.price}}</div>
+        <!--   <a href="" class="col-xs-6 rowww"><img src="{{p.prod.images1.url}}"  class="dimg"></a> -->
+        {% endif %}
+      {% endfor %}
+
+        </div>
+    </div>
+
+  {% for j in home %}
+      {% if j.name == 'mobile' %}
+      <a href="#">
+        <img src="{{j.img.url}}" alt="Banner"class="col-xs-6 ttimg">
+      </a>
+        {% elif j.name == 'tshirt' %}
+        <a href="#">
+          <img src="{{j.img.url}}" alt="Banner" class="col-xs-6 ttimg"/>
+        </a>
+        {% endif %}
+    {% endfor %}
+
+    <div class="timg col-xs-6 container-fluid">
+      <h1>Trendy Tshirts</h1>
+        {% for i in word %}
+        {% if i.name == 'tshirt' %}
+          <p>{{i.info}}</p>
+          {% endif %}
+      {% endfor %}
+      <div class="row">
+        
+       {% for p in pro %}
+        {% if p.name == 'tshirt' %}
+          <a href="/product/{{p.prod.id}}" class="col-xs-6 rowww"><img src="{{p.prod.images1.url}}"  class="dimg"></a>
+        <!--   <a href="" class="col-xs-6 rowww"><img src="{{p.prod.images1.url}}"  class="dimg"></a> -->
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+   
+
+    <div class="timg col-xs-6 container-fluid">
+      <h1>Sturdy Popsockets</h1>
+       {% for i in word %}
+        {% if i.name == 'pop' %}
+          <p>{{i.info}}</p>
+          {% endif %}
+      {% endfor %}
+      <div class="row">
+
+        {% for p in pro %}
+        {% if p.name == 'pop' %}
+
+          <a href="/product/{{p.prod.id}}" class="col-xs-6 rowww"><img src="{{p.prod.images1.url}}"  class="dimg"></a>
+        <!--   <a href="" class="col-xs-6 rowww"><img src="{{p.prod.images1.url}}"  class="dimg"></a> -->
+        {% endif %}
+      {% endfor %}
+
+
+      </div>
+    </div>
+
+
+    {% for j in home %}
+      {% if j.name == 'pop' %}
+      <a href="#">
+        <img src="{{j.img.url}}" alt="Banner"class="col-xs-6 ttimg">
+      </a>
+        {% elif j.name == 'mug' %}
+        <a href="#">
+          <img src="{{j.img.url}}" alt="Banner" class="col-xs-6 ttimg"/>
+        </a>
+        {% endif %}
+    {% endfor %}
+    
+
+    <div class="timg col-xs-6 container-fluid">
+      <h1>Cool Badges</h1>
+        {% for i in word %}
+        {% if i.name == 'mug' %}
+          <p>{{i.info}}</p>
+          {% endif %}
+      {% endfor %}
+      <div class="row">
+       {% for p in pro %}
+        {% if p.name == 'mug' %}
+          <a href="/product/{{p.prod.id}}" class="col-xs-6 rowww"><img src="{{p.prod.images1.url}}"  class="dimg"></a>
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+
+
+  <p style="font-size: 3em;text-align: center;padding: 1.5em;">Trending</p>
+  <div style="padding-left: 10%; margin-bottom: 10%;" class="trend">
+<div>
+          <h2 class="title">Product Categories</h2><!-- End .title -->
+            {% for product, range, nSlides in allProds %}
+                    
+                <div id="demo0{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
+                    <ul class="carousel-indicators">
+                      <li data-target="#demo0{{forloop.counter}}" data-slide-to="0" class="active"></li>
+                          {% for i in range %}
+                        <li data-target="#demo0{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
+                          {% endfor %}
+                        </ul>
+
+                       <div class="product product-4">
+                          <div class="carousel-item active" style="background:#f2f2f2;border:none">
+                            {% for i in product %}
+                              <div class="col-xs-3 col-sm-3 col-md-3" style="background:#f2f2f2">
+                                <div class="card" style="width: 100%;border-radius:10px">
+                                  <h5 class="card-title"><a href ="/product/{{i.products.id}}"><b>{{i.products.title}}</b></a></h5>
+                                   <a href="/product/{{i.products.id}}"><img height="150" width="150" src='{{i.products.images1.url}}' class="card-img-top" alt="..." ></a>
+                                  
+                                  <div class="card-body">
+                                    <h5 class="card-title" style="color: black;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"> 
+                                    </h5>
+                                    <p class="card-text" style="color: black;">
+                                        <b><span class="fa fa-rupee"><span>{{i.products.price}}/-</b>
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+                            </div>
+                            <div class="carousel-item" style="background:#f2f2f2;border:none">
+                              {% endif %}
+
+                              {% endfor %}
+                          </div>
+                      </div>
+			</div>
+    				<!-- left and right controls for the slide -->
+    				<a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+        				<span class="carousel-control-prev-icon"></span>
+    				</a>
+    				<a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+        				<span class="carousel-control-next-icon"></span>
+    				</a>
+    			{% endfor %}
+</div>            
+</div>
+          </div>
+        </div>
+      </div>
+    </div>  
+        <br>        
+  </div>
+
+<!-- Test -->
+<div class="container">
+
+    <!--Slideshow starts here -->
+    {% for product, range, nSlides in all_products %}
+    <h5 class="my-4">Flash Sale On {{product.0.product_category}} - Recommended Items</h5>
+    <div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
+    <ul class="carousel-indicators">
+      <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+
+       {% for i in range %}
+      <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
+      {% endfor %}
+    </ul>
+
+
+<div class="container carousel-inner no-padding">
+  <div class="carousel-item active">
+        {% for i in product %}
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img src='{{i.product_image.url}}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
+              <p class="card-text">{{i.product_desc|slice:":30"}}...</p>
+                <span id="divpr{{i.id}}" class="divpr">
+                    <button id="pr{{i.id}}" class="btn btn-primary cartbtn">Add To Cart</button>
+                </span>
+
+              <a href="{% url 'shop:productview' i.id %}" id="qv{{i.id}}" class="btn btn-primary cart">Details</a>
+            </div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+      </div>
+    <div class="carousel-item">
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+</div>
+    <!-- left and right controls for the slide -->
+    <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+    {% endfor %}
+</div>
+  
+<footer>
+  <p>FOOTER</p>
+</footer>
+
+
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+</script>
+   
+
+
+
+</body>
+</html>
+{%endblock content%} 

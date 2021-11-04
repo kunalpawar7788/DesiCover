@@ -1,0 +1,114 @@
+{% extends "basewhite.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+
+    <style type="text/css">
+        #track1{
+            float: left;
+            text-align: center;
+            border-style: solid;
+            border-width: 1px;
+            padding: 5px 10px;
+            border-radius: 25px;
+        }
+        #track2{
+            color: Blue;
+            float: left;
+        }
+        #track3{
+            float: right;
+            text-align: center;
+            border-style: solid;
+            border-width: 1px;
+            padding: 5px 4px;
+            border-radius: 25px;
+        }
+        .jumbotron{
+            margin-top: 2em;
+            padding-top: 1.5em;
+        }
+        h1{
+            margin-top: 0.5em;
+        }
+        .container{
+            margin-top: 5px;
+            border-style: solid;
+            border-width: 1.2em;
+            border-color: #d123c0;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+   <div class="container">
+    <h1>My Orders</h1>
+    <hr>
+    
+    <div class='form-group'>
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <div class="alert alert-error"style='color: red'>{{ message }}</div>
+            {% endfor %}
+          </ul>
+      {% endif %}
+    </div>
+
+
+    <div>
+        {% for order in orders %}  
+           <div class="row">
+            <span class="col-sm-3 col-xs-3" id="track1">Order id:{{ order.order_id}}</span>
+            <span class="col-sm-6 col-xs-6" id="track2" style="float: left; font-size: 1em;">Order placed {{ order.order_date}}</span>
+            <span class="col-sm-3 col-xs-3" id="track3"><!-- <a href='/trackpackage/{{order.id}}'> --><button class="btn btn-outline-primary-2" onClick="myFunction({{order.id}})">Track Order</button></span>
+            
+            <hr>
+
+            <div style="margin-top: 2.5em;">
+                <div class="col-sm-3 col-xs-6">
+                   <a href="/product/{{order.products.product_id.id}}"></a><img src="{{order.products.product_id.images1.url}}" alt="img1" height="100" width="100"/>
+                </div>
+                
+            
+                <div class="col-sm-6 col-xs-6">
+                        <p style="font-size: 1.5em;"><strong><a href="/product/{{order.products.product_id.id}}">{{ order.products.product_id.title }}</strong></p>
+                        <p>Rs: {{ order.products.price}}</p>
+                    {% if order.paymentmode == 'cod' %}
+                     <p>Payment Mode: Cash On Delivery</p>
+                   {% elif order.paymentmode == 'paytm' %}
+                         <p>Payment Mode: Paytm</p>
+                         <p>Transaction Status {{order.bank.status}}</p>
+                   {% endif %} 
+                </div>
+
+                <div class="col-sm-3 col-xs-12">
+                    <a href='/cancelorder/{{order.id|urlencode}}/' class="btn btn-danger" >Cancel Order</a>
+                    <p>Delivery Expected By</p>
+                    <p><b>15 April 2020</b> </p>
+                  
+                </div>
+            </div>
+            
+            {% endfor %}  
+        </div>
+    </div>
+
+                             
+<script>
+function myFunction(url) {
+  var res = window.btoa(encodeURIComponent(url));
+  var URL='/trackpackage/'+res
+  window.location=URL
+}
+</script>                          
+
+{% endblock content %}

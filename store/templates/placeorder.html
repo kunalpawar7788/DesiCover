@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container">
+    <div class="card card-body">
+    <h4>Filter Orders:</h4>
+
+      <form method="get">
+            {{ myFilter.form.as_p }}
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+
+
+
+ <table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+       <tr>     
+           <!--  <th>Id</th>   -->        
+            <th>Order Id</th>
+            <th>AWB NO </th>
+            <th>Name</th>
+            <!-- <th>Last Name</th>    -->
+            <th>Mobile number</th> 
+            <th>Product Image</th>
+            <th>Address</th>   
+            <!-- <th>Pincode</th> -->
+            <!-- <th>City</th>
+            <th>State</th> -->
+            <th>email</th>
+            <th>Amount</th>                                                 
+       </tr>  
+   </thead>
+
+    <tbody>  
+        {% for order in place %}  
+          <tr> 
+            <!-- <td>{{ order.id}}</td>   -->
+            <td>{{ order.order_id}}</td>
+            <th>{{ order.awb}}</th>
+            <td>{{ order.first_name }}&nbsp;{{ order.last_name }}</td>  
+            <td>{{ order.phone }}</td>
+            <td><img src="{{ order.products.image.url}}"height="100",width="100" /> </td>
+            <td>{{ order.address1 }} &nbsp;{{ order.pincode }}&nbsp;{{ order.city }}&nbsp;{{ order.state }}</td>
+            <td>{{ order.email }}</td>
+            <td>{{ order.totalamount }}</td>
+        </tr>                        
+        {% endfor %} 
+    </tbody>                   
+</table> 
+</div>
+{% endblock content %}
+
+http://demo.desicover.com/accounts/google/login/callback/

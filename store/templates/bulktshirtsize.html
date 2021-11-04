@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+
+ <table class="table table-striped table-bordered table-sm">  
+    <tbody>  
+        <tr> 
+          <td>
+            <form action="/bulkadminsize/" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+              {% csrf_token %}  
+                <div class="form-group">
+                    <div class="col-md-8">
+                        <input type="checkbox" id="small" value="Small" name="small"> Small  <label for="small">
+                        <input type="checkbox" id="medium"value="Medium"name="medium">Medium <label for="medium">
+                        <input type="checkbox" id="large" value="Large" name="large"> Large  <label for="large">
+                        <input type="checkbox" id="XL"    value="XL"    name="XL">    XL     <label for="large">
+                        <input type="checkbox" id="XXL"   value="XXL"   name="XXL">   XXL    <label for="large">
+                    </div>                    
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Approve</button>
+                </div> 
+            </form>
+          </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock content %}

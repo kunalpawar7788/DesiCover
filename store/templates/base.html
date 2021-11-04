@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    
+{% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Desi Covers</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Desicover- ECommerce Website">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/assets/images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/assets/images/icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static '/assets/images/icons/site.html' %}">
+    <link rel="mask-icon" href="{% static '/assets/images/icons/safari-pinned-tab.svg' %}" color="#666666">
+    <link rel="shortcut icon" href="{% static '/assets/images/icons/favicon.ico' %}">
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="{% static '/assets/images/icons/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{% static '/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/plugins/owl-carousel/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/plugins/magnific-popup/magnific-popup.css' %}">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/assets/css/inuse/demo-12.css' %}">
+</head>
+
+<body>
+    <div class="page-wrapper">
+   
+        <header class="header header-9" style="background-color: black;">
+            <div class="header-middle sticky-header">
+                <div class="container">
+                    <div class="header-left">
+                        <button class="mobile-menu-toggler">
+                            <span class="sr-only">Toggle mobile menu</span>
+                            <i class="icon-bars"></i>
+                        </button>
+                        
+                        <a href="/home" class="logo">
+                            <img src="{% static '/assets/images/inuse/logo.png' %}" alt="Molla Logo" width="42" height="25">
+                        </a>
+                    </div><!-- End .header-left -->
+
+                    <div class="header-right" style="margin-left: 0%; color: :dimgray;">
+                        <nav class="main-nav" style="color:dimgray;">
+                            <ul class="menu">
+                                <li class="megamenu-container active">
+                                    <a href="/home" class="sf-with-ul">Home</a>    
+                                </li>
+                                <li>
+                                    <a href="/cover" class="sf-with-ul">Mobile&nbsp;Cover</a>
+                                </li>
+                                <li>
+                                    <a href="/tshirt" class="sf-with-ul">T&nbsp;Shirt</a>
+                                </li>
+                                <li>
+                                    <a href="/mugs" class="sf-with-ul">Mugs</a>
+                                </li>
+                                <li>
+                                    <a href="/popsocket" class="sf-with-ul">Pop&nbsp;Socket</a>
+                                </li>
+
+                                {% if user.is_authenticated %}
+                                 <li>
+                                   <a href="/userprofile">{{ user.get_username }}</a>
+                                </li>
+
+                                <li>
+                                    <a href="/ordersummary">Your&nbsp;Order</a>
+                                </li>
+                                <li><a href="/user/signOut">Sign&nbsp;Out</a></li>
+                                {% else %}
+                                    <li><a href="/login">Sign&nbsp;In</a></li>
+                                {% endif %}
+
+
+
+                            </nav><!-- End .main-nav -->
+                        <div class="header-search" style="margin-left:90%">
+                            <a href="/searchbar" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                            <form action="/searchbar" method="get">
+                                <div class="header-search-wrapper">
+                                    <label for="q" class="sr-only">Search</label>
+                                    <input type="search" class="form-control" name="q" id="q" placeholder="Search in..." required>
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                </div><!-- End .header-search-wrapper -->
+                            </form>
+                        </div><!-- End .header-search -->
+                        
+                
+                        <div class="dropdown cart-dropdown" style="position:absolute;top:22px;right:5px;">
+                       
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <i class="icon-shopping-cart"></i>
+                                <span class="cart-count">{{cart|length}}</span>
+                            </a>
+                        {% if request.user.is_authenticated %}
+                            {% if cart|length != 0 %}
+                               {% for i in cart %}
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-cart-products">
+                                       <div class="product">
+                                            <div class="product-cart-details">
+                                                <h4 class="product-title">
+                                                    <a href="/product/{{i.product_id.id}}">{{i.product_id.title}}</a>
+                                                </h4>
+
+                                                <span class="cart-product-info">
+                                                    <span class="cart-product-qty">{{i.quantity}}</span>
+                                                    x &#x20b9  {{i.price}}
+                                                </span>
+                                            </div><!-- End .product-cart-details -->
+
+                                            <figure class="product-image-container">
+                                                <a href="/product/{{i.product_id.id}}" class="product-image">
+                                                    <img src="{{i.product_id.images1.url}}" alt="product">
+                                                </a>
+                                                </figure>
+                                            <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                        </div><!-- End .product -->
+                                        <div class="dropdown-cart-total">
+                                            <span>Total</span>
+                                            <span class="cart-total-price">&#x20b9 {{i.price}}</span>
+                                        </div><!-- End .dropdown-cart-total -->
+
+                                        <div class="dropdown-cart-action">
+                                            <a href="/Cart" class="btn btn-primary">View Cart</a>
+                                            <a href="/checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                                        </div><!-- End .dropdown-cart-total -->
+                                    </div><!-- End .dropdown-menu -->
+                                </div><!-- End .cart-dropdown -->
+                            {% endfor %}
+                        {% else %}
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div class="dropdown-cart-products">
+                                        <div class="product-cart-details">
+                                           <p style="color: red;">Empty Carts</p>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% endif %}
+                    {% endif %}
+                    </div><!-- End .header-right -->
+                </div><!-- End .container -->
+            </div><!-- End .header-middle -->
+        </header><!-- End .header -->
+
+        {% block content %}
+
+        {% endblock content %}
+            
+
+          <footer class="footer">
+        	<div class="footer-middle">
+	            <div class="container">
+	            	<div class="row" style="margin-left: 20%;">
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget widget-about">
+	            				<img src=" {% static '/assets/images/logo.png' %}" class="footer-logo" alt="Footer Logo" width="105" height="25">
+	            				
+
+	            				<div class="social-icons">
+	            					<a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+	            					<a href="https://www.instagram.com/desi_covers_/" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+	    
+	            				</div><!-- End .soial-icons -->
+	            			</div><!-- End .widget about-widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="/about">About Us</a></li>
+	            					<li><a href="#">How to shop on Desicover</a></li>
+	            					<li><a href="#">FAQ</a></li>
+	            					<li><a href="/contact">Contact us</a></li>
+	            					<li><a href="/flip">Desi Army</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					 {% if request.user.is_authenticated %}
+                                        <li><a href="/user/signOut">Sign Out</a></li>
+                                        <li><a href="/Cart">View Cart</a></li>
+                                        <li><a href="/myaccount">My Account</a></li>
+                                    {% else %}
+                                         <li><a href="/login">Sign In</a></li>
+                                    {% endif %}
+
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+	            	</div><!-- End .row -->
+	            </div><!-- End .container -->
+	        </div><!-- End .footer-middle -->
+
+	        <div class="footer-bottom">
+	        	<div class="container">
+	        	
+	        		<figure class="footer-payments">
+	        			<img src="{% static '/assets/images/payments.png' %}" alt="Payment methods" width="272" height="20">
+	        		</figure><!-- End .footer-payments -->
+	        	</div><!-- End .container -->
+            </div><!-- End .footer-bottom -->
+            </footer>
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container mobile-menu-light">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+            <form action="/searchbar" method="get" class="mobile-search">
+                <label for="q" class="sr-only">Search</label>
+                <input type="search" class="form-control" name="q" placeholder="Search in..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </form>
+            
+            
+            <nav class="mobile-nav">
+                <ul class="mobile-menu">
+                    <li class="active">
+                        <a href="/home">Home</a>
+                    </li>
+                    <li>
+                        <a href="/cover" class="sf-with-ul">Mobile&nbsp;Cover</a>
+                    </li>
+                    <li>
+                        <a href="/tshirt" class="sf-with-ul">T&nbsp;Shirt</a>
+                    </li>
+                    <li>
+                        <a href="/mugs" class="sf-with-ul">Mugs</a>
+                    </li>
+                    <li>
+                        <a href="/popsocket" class="sf-with-ul">Pop&nbsp;Socket</a>
+                    </li>
+                     {% if request.user.is_authenticated %}
+                       <li><a href="/myaccount" class="sf-with-ul">My&nbsp;Account</a></li>
+                       <li><a href="/user/signOut" class="sf-with-ul">Sign Out</a></li>
+                    {% else %}
+                        <li><a href="/login" class="sf-with-ul">Sign In</a></li>
+                    {% endif %}
+                </ul>
+            </nav><!-- End .mobile-nav -->
+
+            <div class="social-icons">
+                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+                <a href="https://www.instagram.com/desi_covers_/" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+            </div><!-- End .social-icons -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    <div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="row no-gutters bg-white newsletter-popup-content">
+                    <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
+                        <div class="banner-content text-center">
+                            <img src="{% static '/assets/images/inuse/logo.png' %}" class="logo" alt="logo" width="60" height="15">
+                            <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
+
+                            <form action="#">
+                                <div class="input-group input-group-round">
+                                    <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
+                                    <div class="input-group-append">
+                                        <button class="btn" type="submit"><span>go</span></button>
+                                    </div><!-- .End .input-group-append -->
+                                </div><!-- .End .input-group -->
+                            </form>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+                                <label class="custom-control-label" for="register-policy-2">Do not show this popup again</label>
+                            </div><!-- End .custom-checkbox -->
+                        </div>
+                    </div>
+                    <div class="col-xl-2-5col col-lg-5 ">
+                        <img src="{% static '/assets/images/popup/newsletter/img-1.jpg' %}" class="newsletter-img" alt="newsletter">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Plugins JS File -->
+    <script src="{% static '/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static '/assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static '/assets/js/jquery.hoverIntent.min.js' %}"></script>
+    <script src="{% static '/assets/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static '/assets/js/superfish.min.js' %}"></script>
+    <script src="{% static '/assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static '/assets/js/bootstrap-input-spinner.js' %}"></script>
+    <script src="{% static '/assets/js/jquery.magnific-popup.min.js' %}"></script>
+    
+    <!-- Main JS File -->
+    <script src="{% static '/assets/js/main.js' %}"></script>
+    <script src="{% static '/assets/js/inuse/demo-12.js' %}"></script>
+</body>
+</html>

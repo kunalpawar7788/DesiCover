@@ -1,0 +1,55 @@
+{% extends "index.html" %}
+{% block content %}
+{% load static %}
+
+
+ <table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+        <tr>               
+            <th>ID</th>
+            <th>SKU</th>
+            <th>CATEGORY</th>
+            <th>SIZE</th>
+            <th>SELECTED SIZE</th>
+            
+                         
+        </tr>  
+    </thead>  
+
+    <tbody>  
+        {% for i in size %}  
+            <tr> 
+                <td>{{i.id}}</td>
+                <td>{{i.sku}}</td>
+                <td>{{i.category}}</td>
+                
+               <td>
+                    <form action="/adminsize/" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+                    {% csrf_token %}  
+                     <div class="form-group">
+                            <input type="hidden" name="Id" value="{{i.id}}" readonly/>
+                        <div class="col-md-8">
+                            <input type="checkbox" id="small" value="Small" name="small"> Small <label for="small">
+                            <input type="checkbox" id="medium"value="Medium"name="medium"> Medium <label for="medium">
+                            <input type="checkbox" id="large" value="Large" name="large"> Large<label for="large">
+                            <input type="checkbox" id="XL"    value="XL"    name="XL"> XL<label for="large">
+                            <input type="checkbox" id="XXL"   value="XXL"   name="XXL"> XXL<label for="large">
+                        </div>                    
+                     </div>
+
+                     <div class="form-group">
+                      
+                        <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Approve</button>
+                    </div> 
+                 
+                </form>
+            </td>
+            <td>{{i.tshirt.small}} {{i.tshirt.Medium}} {{i.tshirt.large}} {{i.tshirt.xl}} {{i.tshirt.xxl}} </td>
+            
+
+            
+               
+            </tr>                         
+        {% endfor %}  
+
+{% endblock content %}

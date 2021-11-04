@@ -1,0 +1,1217 @@
+{% extends "basewhite.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+.mmenu-active .page-wrapper {
+    transform: translateX(0px);}
+
+.category-main-container {
+    
+     display: inline-block; 
+    text-align: left;
+    width: 80%;
+    margin-left:10%;
+}
+
+.category-main-container .sub_cat_main_container {
+    /* width: 11%; */
+    width: 18%;
+    margin-left: .5%;
+    margin-right: .5%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+    text-align: center;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+.category-main-container .sub_cat_main_container a {
+    display: block;
+    }
+.category-main-container .sub_cat_main_container a img {
+    border: 0px solid #9c9c9c;
+}
+
+.category-main-container .sub_cat_main_container .sub_cat_main>a:active{
+  display:block;
+  height:auto;  
+  padding:15px;
+  color:#555;
+  font-size:16px;
+  font-weight:bold;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  word-spacing:3px;
+  text-decoration:none;
+}
+
+.sub_cat_main_container.active a:before {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+img {
+    border: 0 none;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.category-main-container .sub_cat_main_container span.gray-logo img{
+margin:auto;}
+
+.category-main-container .sub_cat_main_container span.over-logo {
+    display: none;
+}
+.category-main-container .sub_cat_main_container:hover span.over-logo {
+    display: inline-block;
+}
+.category-main-container .sub_cat_main_container:hover span.gray-logo {
+  display: none;
+}
+
+.category-main-container .sub_cat_main_container h5 {
+    line-height: 15px;
+    text-transform: uppercase;
+    color: #7f7f7f;
+    font-weight: normal;
+    font-size: 12px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+.category-main-container .sub_cat_main_container:hover h5 {
+    color: black;
+    font-weight: bold;
+}
+
+
+.category-main-container .sub_cat_main_container .up_arrow_icon {
+    width: 0px;
+    height: 0px;
+    left: 217px;
+    opacity: 0;
+    display: inline-block;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 8px;
+    border-top-width: 0;
+    border-bottom-color: #eeeeee;
+    }
+
+.category-main-container .sub_cat_main_container:hover .up_arrow_icon {
+   opacity: 1;
+    }    
+
+.category-main-container .sub_cat_main_container .sub_cat_main {
+    position: absolute;
+    height: auto;
+    overflow: hidden;
+    top: inherit;
+    left: 10%;
+    background-color: #e6e6e6;
+    margin-top: -5px;
+    width: 80%;
+    -webkit-transition: 0.3s ease-in-out;
+    -moz-transition: 0.3s ease-in-out;
+    -o-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+
+.category-main-container .sub_cat_main_container .sub_cat_main ul {
+    width: 1067px;
+    background-color: #e6e6e6;
+    display: inline-block;
+    padding: 12px 0px;
+}
+
+.category-main-container .sub_cat_main_container .sub_cat_main ul {
+    width: 100% !important;
+}
+
+ul, ol {
+    list-style: outside none none;
+    margin: 0;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}  
+
+.category-main-container .sub_cat_main_container .sub_cat_main ul li {
+    width: 17.7%;
+    float: left;
+    margin-left: .88%;
+    margin-right: .88%;
+    line-height: 30px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    border: 1px solid #9c9c9c;
+}
+.category-main-container .sub_cat_main_container .sub_cat_main ul li {
+    margin-left: 1.16% !important;
+}
+
+.category-main-container .sub_cat_main_container .sub_cat_main ul li a {
+    color: #6d6d6d;
+    font-size: 13px;
+    white-space: nowrap;
+    font-weight: 500;
+    padding: 0px 5px;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease-in-out 0s;
+}
+.category-main-container .sub_cat_main_container a {
+    display: block;
+}
+a {
+    text-decoration: none;
+}
+
+.sub_cat_main .panel-collapse .collapse .in {
+    display: block !important;
+      height: auto !important;
+}
+
+ul li.sub_cat{list-style: none;}
+
+ul li.sub_cat:hover a{
+    background-color: #c96;
+    color: white;
+}
+
+@media screen and (max-width: 900px){
+  .category-main-container {
+      margin-left:10%;
+    }
+
+  .category-main-container .sub_cat_main_container .sub_cat_main {
+      left:10%; }
+
+}
+
+@media screen and (max-width: 850px){
+  .category-main-container .sub_cat_main_container {
+    width:20%;  }
+
+    .category-main-container {
+      margin-left:10%;
+    }
+
+  .category-main-container .sub_cat_main_container .sub_cat_main {
+      left:10%; }
+  .category-main-container .sub_cat_main_container .sub_cat_main ul li {
+         width: 22%;  }
+
+
+
+}
+
+@media screen and (max-width: 650px){
+  .category-main-container .sub_cat_main_container {
+    width:30%;  }
+
+    .category-main-container {
+      margin-left:10%;
+    }
+
+  .category-main-container .sub_cat_main_container .sub_cat_main {
+      left:10%; }
+
+  .category-main-container .sub_cat_main_container .sub_cat_main ul li {
+         width: 46%;  }
+
+
+
+}
+
+
+</style>
+
+  
+
+<div class="category-main-container" role="tablist" aria-multiselectable="true">
+   <div class="sub_cat_main_container" role="tab" id="headingOne"style="height: 107px;">
+    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#one" aria-expanded="false" aria-controls="one" >
+
+      <span class="gray-logo"> 
+                 <img src="{% static 'assets/images/inuse/Appleblack.png' %}" alt="apple-logo_3"></span> <span class="over-logo"> 
+                 <img src="{% static 'assets/images/inuse/Applewhite.png' %}" alt="apple-hover-logo_2"></span>
+      <h5>Apple</h5>
+      <div class="up_arrow_icon"></div>
+    </a>
+
+
+<div id="one" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingOne" style="height: 0px;display: none">
+<ul>
+
+  {% for product in product %}
+      {% if product.company == 'APPLE' %}
+         <li class="sub_cat">
+            <a href="/mobilecover/{{product.mobilename}}">{{product.mobilename}}</a>
+          </li> 
+          <!-- lower|slugify  |slugify|urlencode-->
+      {% endif %}
+  {% endfor %}
+
+
+</ul>
+
+</div>
+</div>
+
+
+
+<div class="sub_cat_main_container" role="tab" id="headingTwo" style="height: 107px;">
+    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#two" aria-expanded="false" aria-controls="two" >
+        <span class="gray-logo"> 
+             <img src="{% static 'assets/images/inuse/oneplusblack.png' %}"></span> 
+             <span class="over-logo"> 
+             <img src="{% static 'assets/images/inuse/onepluswhite.png' %}"></span>
+<h5>OnePlus</h5>
+
+<div class="up_arrow_icon"></div>
+</a>
+    <div id="two" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingTwo" style="height: 0px;display: none;">
+        <ul>
+         
+            {% for product in product %}
+                {% if product.company == 'oneplus' %}
+                 <li class="sub_cat">
+                  <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+                {% endif %}
+            {% endfor %}
+           <!--  <a href="#" title="iPhone 11 Pro Max">iPhone 11 Pro Max</a> -->
+          
+
+        </ul>
+    </div>
+</div>
+
+
+<div class="sub_cat_main_container" role="tab" id="headingThree" style="height: 107px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#three" aria-expanded="false" aria-controls="three">
+    <span class="gray-logo"> 
+        <img src="{% static 'assets/images/inuse/MiC.png' %}"></span> 
+        <span class="over-logo"> 
+             <img src="{% static 'assets/images/inuse/MiO.png' %}"></span>
+<h5>Xiaomi</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="three" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingThree" style="height: 0px;display: none;" >
+ 
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'XIAOMI' %}
+        <li class="sub_cat">
+          <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+
+<div class="sub_cat_main_container" role="tab" id="headingFour"style="height: 107px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#four" aria-expanded="false" aria-controls="four"><span class="gray-logo"> 
+    <img src="{% static 'assets/images/inuse/SamsungC.png' %}"></span> <span class="over-logo"> 
+     <img src="{% static 'assets/images/inuse/SamsungO.png' %}"></span>
+<h5>Samsung</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="four" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingFour" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'SAMSUNG' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+
+<div class="sub_cat_main_container" role="tab" id="headingFive"style="height: 107px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#five" aria-expanded="false" aria-controls="five"><span class="gray-logo"> 
+    <img src="{% static 'assets/images/inuse/OppoC.png' %}"></span> <span class="over-logo"> 
+     <img src="{% static 'assets/images/inuse/OppoO.png' %}"></span>
+<h5>Oppo</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="five" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingFive" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'OPPO' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+
+<div class="sub_cat_main_container" role="tab" id="headingSix"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#six" aria-expanded="false" aria-controls="six">
+    <span class="gray-logo"> 
+     <img src="{% static 'assets/images/inuse/VivoC.png' %}">
+    </span> 
+    <span class="over-logo"> 
+     <img src="{% static 'assets/images/inuse/VivoO.png' %}">
+    </span>
+<h5>Vivo</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="six" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingSix" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'VIVO' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+<div class="sub_cat_main_container" role="tab" id="headingSeven"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#seven" aria-expanded="false" aria-controls="seven"><span class="gray-logo"> 
+     <img src="{% static 'assets/images/inuse/realmeC.png' %}"></span> <span class="over-logo"> 
+      <img src="{% static 'assets/images/inuse/realmeO.png' %}"></span>
+<h5>Realme</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="seven" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingSeven" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'REALME' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+<div class="sub_cat_main_container" role="tab" id="headingEight"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#eight" aria-expanded="false" aria-controls="eight"><span class="gray-logo">
+ <img src="{% static 'assets/images/inuse/PocoC.png' %}">
+</span> <span class="over-logo">
+  <img src="{% static 'assets/images/inuse/pocoO.png' %}"></span>
+<h5>Poco</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="eight" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingEight" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'POCO' %}
+        <li class="sub_cat">
+         <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+<div class="sub_cat_main_container" role="tab" id="headingNine"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#nine" aria-expanded="false" aria-controls="nine"><span class="gray-logo">
+  <img src="{% static 'assets/images/inuse/AsusC.png' %}"></span> <span class="over-logo"> 
+     <img src="{% static 'assets/images/inuse/AsusO.png' %}"></span>
+<h5>Asus</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="nine" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingNine" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'ASUS' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+<div class="sub_cat_main_container" role="tab" id="headingTen"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#ten" aria-expanded="false" aria-controls="ten"><span class="gray-logo"> 
+     <img src="{% static 'assets/images/inuse/coolpadC.png' %}"></span> <span class="over-logo"> 
+     <img src="{% static 'assets/images/inuse/coolpadO.png' %}"></span>
+<h5>Coolpad</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="ten" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingTen" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'COOLPAD' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+<div class="sub_cat_main_container" role="tab" id="headingEleven"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#eleven" aria-expanded="false" aria-controls="eleven"><span class="gray-logo"> 
+    <img src="{% static 'assets/images/inuse/googleC.png' %}"></span> <span class="over-logo"> 
+       <img src="{% static 'assets/images/inuse/GoogleO.png' %}"></span>
+<h5>Google</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="eleven" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingEleven" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'GOOGLE' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+<div class="sub_cat_main_container" role="tab" id="headingTwelve"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#twelve" aria-expanded="false" aria-controls="twelve"><span class="gray-logo">
+   <img src="{% static 'assets/images/inuse/HTCC.png' %}"></span> <span class="over-logo"> 
+   <img src="{% static 'assets/images/inuse/HTCO.png' %}"></span>
+<h5>HTC</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="twelve" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingTwelve" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'HTC' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+<div class="sub_cat_main_container" role="tab" id="headingThirteen"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#thirteen" aria-expanded="false" aria-controls="thirteen"><span class="gray-logo"> 
+    <img src="{% static 'assets/images/inuse/huaC.png' %}"></span> <span class="over-logo"> 
+    <img src="{% static 'assets/images/inuse/huaO.png' %}"></span>
+<h5>Huawei</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="thirteen" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingThirteen" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'HUAWEI' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+<div class="sub_cat_main_container" role="tab" id="headingFourteen"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#fourteen" aria-expanded="false" aria-controls="fourteen"><span class="gray-logo"> 
+    <img src="{% static 'assets/images/inuse/Lenovo.png' %}"></span> <span class="over-logo"> 
+     <img src="{% static 'assets/images/inuse/LenovoC.png' %}"></span>
+<h5>Lenovo</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="fourteen" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingFourteen" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'LENOVO' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+<div class="sub_cat_main_container" role="tab" id="headingFifteen"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#fifteen" aria-expanded="false" aria-controls="fifteen"><span class="gray-logo"> 
+     <img src="{% static 'assets/images/inuse/NokiaC.png' %}"></span> <span class="over-logo"> 
+       <img src="{% static 'assets/images/inuse/NokiaO.png' %}"></span>
+<h5>Nokia</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="fifteen" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingFifteen" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'NOKIA' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+<div class="sub_cat_main_container" role="tab" id="headingSixteen"style="height: 137px;display: none;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#sixteen" aria-expanded="false" aria-controls="sixteen"><span class="gray-logo"> 
+     <img src="{% static 'assets/images/inuse/MotoC.png' %}"></span> <span class="over-logo"> 
+     <img src="{% static 'assets/images/inuse/MotoO.png' %}"></span>
+<h5>Motorola</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="sixteen" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingSixteen" style="height: 0px;" >
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'MOTOROLA' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+<div class="sub_cat_main_container" role="tab" id="headingSeventeen"style="height: 137px;">
+<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#seventeen" aria-expanded="false" aria-controls="seventeen"><span class="gray-logo"> 
+     <img src="{% static 'assets/images/inuse/SonyC.png' %}"></span> <span class="over-logo"> 
+       <img src="{% static 'assets/images/inuse/SonyO.png' %}"></span>
+<h5>Sony</h5>
+<div class="up_arrow_icon"></div>
+</a>
+<div id="seventeen" class="panel-collapse collapse sub_cat_main" role="tabpanel" aria-labelledby="headingSeventeen" style="height: 0px;display: none;">
+ <ul>     
+    {% for product in product %}
+      {% if product.company == 'SONY' %}
+        <li class="sub_cat">
+           <a href="/mobilecover/{{product.mobilename}}" >{{product.mobilename}}</a></li>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+</div>
+
+
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+
+<script>
+    var allcontainer= document.querySelectorAll(".sub_cat_main_container");
+
+    var allsubcontainer= document.querySelectorAll(".sub_cat_main");
+
+    for(i in allcontainer){
+         allcontainer[i].addEventListener("click",function(){
+
+
+            if(this.id == "headingOne"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "one"){
+                allsubcontainer[0].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+               }
+            }
+        }
+
+
+
+                    if(this.id == "headingTwo"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "two"){
+                allsubcontainer[1].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingThree"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "three"){
+                allsubcontainer[2].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingFour"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "four"){
+                allsubcontainer[3].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingFive"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "five"){
+                allsubcontainer[4].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingSix"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "six"){
+                allsubcontainer[5].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingSeven"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "seven"){
+                allsubcontainer[6].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingEight"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "eight"){
+                allsubcontainer[7].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingNine"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "nine"){
+                allsubcontainer[8].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingTen"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "ten"){
+                allsubcontainer[9].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingEleven"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "eleven"){
+                allsubcontainer[10].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingTwelve"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "twelve"){
+                allsubcontainer[11].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingThirteen"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "thirteen"){
+                allsubcontainer[12].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingFourteen"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "fourteen"){
+                allsubcontainer[13].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingFifteen"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "fifteen"){
+                allsubcontainer[14].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingSixteen"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "sixteen"){
+                allsubcontainer[15].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+                    allsubcontainer[16].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+ if(this.id == "headingSeventeen"){
+            for(j in allsubcontainer){
+                if(allsubcontainer[j].id == "seventeen"){
+                allsubcontainer[16].style.display= "block";
+                   
+
+                }
+                 else{
+                    allsubcontainer[0].style.display= "none";
+                    allsubcontainer[2].style.display= "none";
+                    allsubcontainer[3].style.display= "none";
+                    allsubcontainer[4].style.display= "none";
+                    allsubcontainer[5].style.display= "none";
+                    allsubcontainer[6].style.display= "none";
+
+                    allsubcontainer[7].style.display= "none";
+                    allsubcontainer[8].style.display= "none";
+                    allsubcontainer[9].style.display= "none";
+                    allsubcontainer[10].style.display= "none";
+                    allsubcontainer[11].style.display= "none";
+                    allsubcontainer[12].style.display= "none";
+                    allsubcontainer[13].style.display= "none";
+                    allsubcontainer[14].style.display= "none";
+                    allsubcontainer[15].style.display= "none";
+                    allsubcontainer[1].style.display= "none";
+
+
+
+
+
+                }
+            }
+        }
+
+
+
+
+
+
+         })
+    }
+
+</script>
+
+
+
+
+{% endblock content %}
+
